@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
+    <link rel="stylesheet" th:href="@{/css/wavve.css}">
+    <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script th:src="@{/js/wavve.js}" th:inline="javascript"></script>
+    <title>웨이브(wavve)</title>
+</head>
+<body>
+<th:block th:fragment="header">
+    <div div id="top_fixed">
+        <div id="admin" th:if="${session.loginUser == null}">
+            <div class="admin_wrap">
+                <ul class="admin">
+                    <li><a th:href="@{/user/login}">로그인</a></li>
+                    <li><a href="#">이용권</a></li>
+                    <li><a href="#">이벤트</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="admin-out" th:if="${session.loginUser != null}">
+            <div class="admin_wrap">
+                <ul class="admin">
+                    <li><a th:href="@{/user/logout}">로그아웃</a></li>
+                    <li><a href="#">이용권</a></li>
+                    <li><a href="#">이벤트</a></li>
+                </ul>
+            </div>
+        </div>
+        <header>
+            <div id="header_wrap">
+                <div id="logo">
+                    <a th:href="@{/}"><img
+                            src="data:image/png;base64,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"
+                            alt="wavve">
+                    </a>
+                </div>
+                <div class="menu_wrap">
+                    <ul class="menu">
+                        <li><a href="#">홈</a></li>
+                        <li><a href="#">카테고리</a>
+                            <ul class="submenu">
+                                <li><a href="#">전체 카테고리 보기</a></li>
+                                <li><a href="#">추천메뉴</a>
+                                <li><a href="#">드라마</a></li>
+                                <li><a href="#">예능</a>
+                                <li><a href="#">영화</a></li>
+                                <li><a href="#">영화플러스</a>
+                                <li><a href="#">해외시리즈</a></li>
+                                <li><a href="#">프로야구</a>
+                                <li><a href="#">ORIGINAL</a></li>
+                                <li><a href="#">CLASSIC</a>
+                            </ul>
+                        </li>
+                        <li><a href="#">LIVE</a></li>
+                        <li><a href="#">MY</a></li>
+                    </ul>
+                </div>
+                <div id="search">
+                    <img th:src="@{/imgs/main-img/search.svg}"><a href="#">검색하기</a>
+                </div>
+            </div>
+        </header>
+    </div>
+</th:block>
+
+<div class="container">
+    <th:block layout:fragment="content"></th:block>
+</div>
+
+<th:block th:fragment="footer">
+    <footer>
+        <div id="ft_top">
+            <div id="notice">
+                <div class="noticeslide">
+                    공지사항
+                    <ul class="notice">
+                        <li><a href="#">wavve오리지널 '탱키박스' 시청 이벤트 안내</a></li>
+                        <li><a href="#">HBO 시리즈 신규 오픈 안내</a></li>
+                        <li><a href="#">wavve오리지널 '탱키박스' 시청 이벤트 안내</a></li>
+                        <li><a href="#">HBO 시리즈 신규 오픈 안내</a></li>
+                    </ul>
+                </div>
+                <div class="noticebt">
+                    <div class="left">
+                        &#8249;
+                    </div>
+                    <div class="right">
+                        &#8250;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footerbt">
+            <div class="btn-float-box">
+                <div class="btn-float btn-top">
+                    <button class="button">
+                        <span class="a11y-hidden"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="ft0">
+                <ul class="ft1">
+                    <li><a href="#" th:href="@{https://www.wavve.com/customer/company.html}" target='_blank'>회사소개</a>
+                    </li>
+                    <li><a href="#" th:href="@{https://wavve.career.greetinghr.com/}" target='_blank'>인재채용</a></li>
+                    <li><a href="#" th:href="@{https://www.wavve.com/customer/service/}">서비스 소개</a></li>
+                    <li><a href="#" th:href="@{https://www.wavve.com/customer/agreement}">이용약관</a></li>
+                    <li><a href="#" th:href="@{https://www.wavve.com/customer/agreement?category=privacy}">개인정보 처리방침</a>
+                    </li>
+                    <li><a href="#" th:href="@{https://www.wavve.com/customer/notice_list}">고객센터</a></li>
+                </ul>
+                <div class="sns">
+                    <div class=waveon>
+                        <img th:src="@{/imgs/main-img/waveon.png}">
+                        <select class="waveonselect">
+                            <option>사업자용 웨이브 가입</option>
+                            <option>웨이브온 서비스 소개</option>
+                            <option>웨이브온 PC방 서비스</option>
+                            <option>웨이브온 도서관 서비스</option>
+                            <option>웨이브온 병원 서비스</option>
+                            <option>웨이브온 숙박 서비스</option>
+                            <option>웨이브온 일반 서비스</option>
+                        </select>
+                    </div>
+                    <div class="snsbt">
+                        <a href="#"><img th:src="@{/imgs/main-img/sns1.png}"></a>
+                    </div>
+                    <div class="snsbt">
+                        <a href="#"><img th:src="@{/imgs/main-img/sns2.png}"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="ft3">
+                <br>
+                <ul class="ful">
+                    <li>콘텐츠 웨이브 주식회사</li>
+                    <li>대표이사 이태현</li>
+                    <li>고객센터 1599-9709 (평일 09:00~18 / 점심시간 12:00~13:00 / 주말 및 공휴일 휴무)</li>
+                </ul>
+                <ul class="ful">
+                    <li>사업자 등록번호 220-88-38020</li>
+                    <li>호스팅서비스제공자:마이크로소프트 유한회사</li>
+                </ul>
+                <ul class="ful">
+                    <li>통신판매업 신고번호 : 제 2021-서울영등포-0585호</li>
+                    <li>통신판매업 정보 공개 : http://www.ftc.go.kr/bizCommPop.do?wrkr_no=220-88-38020</li>
+                </ul>
+                <ul class="ful">
+                    <li>서울특별시 영등포구 여의나루로 60 포스트타워 19층</li>
+                    <li>전자우편주소 : helpdesk@wavve.com</li>
+                </ul>
+                <ul class="ful">
+                    <li>Copyright© 콘텐츠웨이브(주) All rights reserved.</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</th:block>
+</body>
+</html>

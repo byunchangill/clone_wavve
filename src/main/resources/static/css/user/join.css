@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.header {
+    background-color: #1b1b1b;
+    width: 100%;
+    min-width: 1240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.header-gnb {
+    position: relative;
+    width: 1240px;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+.header-gnb h1 {
+    display: inline-block;
+    margin-right: 70px;
+    padding: 61px 0 27px;
+    vertical-align: middle;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.member {
+    width: 100%;
+    z-index: 10;
+    margin-top: 108px;
+    overflow: hidden;
+    background-color: #1b1b1b;
+}
+
+.join {
+    width: 560px;
+    position: relative;
+}
+.member-layout {
+    margin: 80px auto;
+    background: #252525;
+}
+
+.step-bar {
+    width: 100%;
+    height: 5px;
+    background: #2f2f2f;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.step-bar span {
+    height: 5px;
+    display: block;
+    text-indent: -9999px;
+}
+
+.gradation-blue {
+    background-color: #1351f9;
+}
+
+.common-box {
+    padding: 40px 40px;
+}
+
+.member-layout .join-hd {
+    color: #a5a5a5;
+    margin: 20px 0 20px;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.36;
+}
+
+.member-layout .join-hd span, .member-layout .join-hd strong {
+    font-weight: 400;
+    color: #fff;
+}
+
+button, input, textarea {
+    margin: 0;
+    background: transparent;
+}
+
+input, button, select {
+    font-family: 'NotoSans', sans-serif;
+}
+
+.member-layout fieldset {
+    width: 100%;
+}
+
+td, th, img, abbr, acronym, img, fieldset, iframe {
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+}
+
+caption, legend {
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    height: 0;
+    width: 0;
+    text-indent: -999em;
+}
+
+.join .join-input-box {
+    overflow: hidden;
+}
+
+dl, dt, dd, ul, ol, ul, pre {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.join .join-input-box li {
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.join .join-input-box label {
+    font-size: 16px;
+    color: #a5a5a5;
+    /* margin: 0 0 16px; */
+    display: block;
+    font-weight: 700;
+}
+
+label {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.member-layout input[type="text"].input-style02 {
+    padding: 0 90px 0 20px;
+    width: 100%;
+}
+
+.member-layout input[type="text"].input-style01, .member-layout input[type="number"].input-style01, .member-layout input[type="email"].input-style01, .member-layout input[type="password"].input-style01, .member-pop-wrap input[type="password"].input-style01 {
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -0.9px;
+    height: 53px;
+    line-height: 54px;
+    color: #fff;
+    background-color: #2f2f2f;
+    border: none;
+    padding-left: 10px;
+}
+
+.login-error-gray {
+    color: #a5a5a5;
+}
+
+.login-error-gray, .login-error-red, .login-error-red, .login-error-purple, .login-error-pink {
+    padding-left: 24px;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.btn-input, .time-limit {
+    position: absolute;
+    right: 16px;
+    top: 5px;
+    padding: 10px 4px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+}
+
+button, input, textarea {
+    margin: 0;
+    background: transparent;
+}
+
+button {
+    cursor: pointer;
+    border: 0 none;
+}
+
+input, button, select {
+    font-family: 'NotoSans', sans-serif;
+}
+
+.btn-wavve-join a {
+    padding: 20px 0;
+    color: #fff;
+    background-color: #717171;
+}
+
+.btn-wavve-join a, .btn-sns-join a {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 20px;
+    border-radius: 100px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.sns-box {
+    margin-top: 50px;
+}
+
+.or-bar-box {
+    position: relative;
+}
+
+.or-bar-left {
+    left: 0;
+}
+
+.or-bar-right {
+    right: 0;
+}
+
+.or-bar {
+    position: absolute;
+    top: 10px;
+    display: block;
+    width: 24%;
+    border-bottom: 1px solid #2f2f2f;
+}
+
+.member-layout h3.join-sns-hd {
+    margin: 0;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
+    color: #a5a5a5;
+}
+
+.btn-sns-join {
+    margin: 0 auto;
+    padding: 40px 0;
+    font-size: 0;
+    text-align: center;
+}
+
+.btn-sns-join li {
+    display: inline-block;
+    width: 60px;
+    padding: 10px;
+}
+
+.btn-sns-join li:nth-child(1) a {
+    background-color: #fff100;
+}
+
+.btn-sns-join li:nth-child(2) a {
+    background-color: #23b909;
+}
+
+.btn-sns-join a {
+    padding: 14px 0;
+}
+
+.btn-sns-join li:nth-child(3) a {
+    background-color: #3b5998;
+}
+
+.btn-sns-join li:nth-child(4) a {
+    background-color: #ffffff;
+}
+
+.google-img {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.btn-wavve-join a, .btn-sns-join a {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 20px;
+    border-radius: 100px;
+}
+
+.txt-exclamation {
+    text-align: left;
+    color: #717171;
+}
+
+.txt-exclamation p {
+    position: relative;
+    padding-left: 10px;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.txt-exclamation p > span {
+    display: block;
+}
+
+.join-input {
+    border: none;
+    font-size: 20px;
+    color: #dddddd;
+}

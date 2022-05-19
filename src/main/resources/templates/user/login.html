@@ -1,0 +1,100 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragments/common">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/user/login.css}">
+    <title>웨이브 로그인</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="member">
+        <div class="login member-layout">
+            <h1 tabindex="0">로그인</h1>
+            <div class="join-sns-box">
+                <h2 tabindex="0" class="login-box-hd wavve-hd">wavve 계정으로 로그인</h2>
+                <form th:action="@{/user/login}" method="post">
+                    <fieldset>
+                        <legend>로그인 양식</legend>
+                        <ul class="input-wrap01">
+                            <li>
+                                <label>
+                                    <input type="text" name="w_id" placeholder="이메일 주소 또는 아이디" class="input-style01">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="password" name="w_pw" placeholder="비밀번호" class="input-style01">
+                                </label>
+                            </li>
+                        </ul>
+                        <ul class="checkbox-wrap01">
+                            <li class="check-style check-style-dark">
+                                <input type="checkbox" id="id-save" class="check-blue-dark">
+                                <label for="id-save">아이디 저장</label>
+                            </li>
+                            <li class="check-style check-style-dark">
+                                <input type="checkbox" id="login-auto" class="check-blue-dark">
+                                <label for="login-auto">자동 로그인</label>
+                            </li>
+                        </ul>
+                        <div class="btn-purple btn-purple-dark">
+                            <input type="submit" value="로그인">
+                        </div>
+                    </fieldset>
+                </form>
+                <ul class="join-find">
+                    <li><a href="#">아이디 찾기</a></li>
+                    <li><a href="#">비밀번호 재설정</a></li>
+                    <li><a th:href="@{/user/join}">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="sns-box">
+                <div class="or-bar-box">
+                    <span class="or-bar or-bar-left"></span>
+                    <h2 tabindex="0" class="login-box-hd">또는 다른 서비스 계정으로 로그인</h2>
+                    <span class="or-bar or-bar-right"></span>
+                </div>
+                <div class="login-sns">
+                    <ul>
+                        <li class="login-sns-each kakao">
+                            <a href="#">
+                                <span class="icon-sns icon-kakao"></span>
+                                <span class="a11y-hidden">카카오로 로그인</span>
+                            </a>
+                        </li>
+                        <li class="login-sns-each naver">
+                            <a href="#">
+                                <span class="icon-sns icon-naver"></span>
+                                <span class="a11y-hidden">네이버로 로그인</span>
+                            </a>
+                            <div id="naverIdLogin" style="display: none;">
+                                <a id="naverIdLogin_loginButton" href="#">
+                                    <img src="https://static.nid.naver.com/oauth/button_g.PNG?version=js-2.0.0"
+                                         height="60">
+                                </a>
+                            </div>
+                        </li>
+                        <li class="login-sns-each facebook">
+                            <a href="#">
+                                <span class="icon-sns icon-facebook"></span>
+                                <span class="a11y-hidden">페이스북으로 로그인</span>
+                            </a>
+                        </li>
+                        <li class="login-sns-each google">
+                            <a href="#">
+                                <span class="icon-sns icon-google"></span>
+                                <span class="a11y-hidden">구글로 로그인</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p class="sns-exclamation">
+                    <span>SNS계정으로 간편하게 가입하여 서비스를 이용하실 수 있습니다.</span>
+                    <span>기존 POOQ 계정 또는 wavve 계정과는 연동되지 않으니 이용에 참고하세요.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</th:block>

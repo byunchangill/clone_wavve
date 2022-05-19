@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="imgs/wavve-icon/ms-icon-310x310.png">
+    <link rel="stylesheet" href="/css/wavve.css">
+    <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="/js/wavve.js" defer="defer"></script>
+    <title>웨이브(wavve)</title>
+</head>
+
+<body>
+<div id="top_fixed" th:replace="fragments/common :: header">
+    <div id="admin">
+        <div class="admin_wrap">
+            <ul class="admin">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">이용권</a></li>
+                <li><a href="#">이벤트</a></li>
+            </ul>
+        </div>
+    </div>
+<!--    <div sec:authorize="isAuthenticated()">
+        <div class="admin_wrap">
+            <ul class="admin">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">이용권</a></li>
+                <li><a href="#">이벤트</a></li>
+            </ul>
+        </div>
+    </div>-->
+    <header>
+        <div id="header_wrap">
+            <div id="logo">
+                <a href="#"><img
+                        src="data:image/png;base64,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"
+                        alt="wavve">
+                </a>
+            </div>
+            <div class="menu_wrap">
+                <ul class="menu">
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">카테고리</a>
+                        <ul class="submenu">
+                            <li><a href="#">전체 카테고리 보기</a></li>
+                            <li><a href="#">추천메뉴</a>
+                            <li><a href="#">드라마</a></li>
+                            <li><a href="#">예능</a>
+                            <li><a href="#">영화</a></li>
+                            <li><a href="#">영화플러스</a>
+                            <li><a href="#">해외시리즈</a></li>
+                            <li><a href="#">프로야구</a>
+                            <li><a href="#">ORIGINAL</a></li>
+                            <li><a href="#">CLASSIC</a>
+                        </ul>
+                    </li>
+                    <li><a href="#">LIVE</a></li>
+                    <li><a href="#">MY</a></li>
+                </ul>
+            </div>
+            <div id="search">
+                <img src="imgs/main-img/search.svg"><a href="#">검색하기</a>
+            </div>
+        </div>
+    </header>
+</div>
+<div id="imgslide">
+    <div class="imgs">
+        <div class="imgbox">
+            <img src="imgs/main-img/1.jpg">
+            <img src="imgs/main-img/11.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/2.jpg">
+            <img src="imgs/main-img/22.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/3.jpg">
+            <img src="imgs/main-img/33.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/4.jpg">
+            <img src="imgs/main-img/44.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/5.jpg">
+            <img src="imgs/main-img/55.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/6.jpg">
+            <img src="imgs/main-img/66.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/7.jpg">
+            <img src="imgs/main-img/77.png">
+        </div>
+        <div class="imgbox">
+            <img src="imgs/main-img/8.jpg">
+            <img src="imgs/main-img/88.png">
+        </div>
+    </div>
+    <div class="prev_bt">&#8249;</div>
+    <div class="next_bt">&#8250;</div>
+</div>
+<div id="bt">
+    <div class="play_bt">
+        <img src="imgs/main-img/playbt.svg">
+    </div>
+    <div class="stop_bt">
+        <img src="imgs/main-img/stopbt.svg">
+    </div>
+    <div class="bt_dot">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+</div>
+
+<div class="content_title">
+    실시간 인기 프로그램<span>더보기 &#8250;</span>
+</div>
+<div id="content">
+    <div class="prev">&#8249;</div>
+    <div class="next">&#8250;</div>
+    <div class="contentimgs">
+        <div class="contentslide">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c1.jpg">
+                </div>
+                <a href="#">런닝맨</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c2.jpg">
+                </div>
+                <a href="#">연모</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c5.jpg">
+                </div>
+                <a href="#">동상이몽2_너는 내 운명</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c3.jpg">
+                </div>
+                <a href="#">미운 우리 새끼</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c4.jpg">
+                </div>
+                <a href="#">놀면 뭐하니?</a>
+            </div>
+        </div>
+        <div class="contentslide">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c6.jpg">
+                </div>
+                <a href="#">지금, 헤어지는 중입니다</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c7.jpg">
+                </div>
+                <a href="#">전지적 참견시점</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c8.jpg">
+                </div>
+                <a href="#">피의 게임</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c9.jpg">
+                </div>
+                <a href="#">나 혼자 산다</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c10.jpg">
+                </div>
+                <a href="#">안싸우면 다행이야</a>
+            </div>
+        </div>
+        <div class="contentslide">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c11.jpg">
+                </div>
+                <a href="#">연애의 참견</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c12.jpg">
+                </div>
+                <a href="#">와카남</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c13.jpg">
+                </div>
+                <a href="#">꼬리에 꼬리를 무는 그날이야기</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c14.jpg">
+                </div>
+                <a href="#">옥탑방의 문제아들</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/c15.jpg">
+                </div>
+                <a href="#">그것이 알고싶다</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content_title">
+    HBO시리즈, 지금 도착했습니다<span>더보기 &#8250;</span>
+</div>
+<div id="content">
+    <div class="prev2">&#8249;</div>
+    <div class="next2">&#8250;</div>
+    <div class="contentimgs">
+        <div class="contentslide2">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h1.jpg">
+                </div>
+                <a href="#">유포리아 스페셜 파트1</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h2.jpg">
+                </div>
+                <a href="#">유포리아 스페셜 파트2</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h3.jpg">
+                </div>
+                <a href="#">카니발 시즌1</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h4.jpg">
+                </div>
+                <a href="#">메어 오브 이스트 타운</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h5.jpg">
+                </div>
+                <a href="#">뉴스룸 시즌3</a>
+            </div>
+        </div>
+        <div class="contentslide2">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h6.jpg">
+                </div>
+                <a href="#">유포리아 시즌1</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h7.jpg">
+                </div>
+                <a href="#">카니발 시즌2</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h8.jpg">
+                </div>
+                <a href="#">언두잉</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h9.jpg">
+                </div>
+                <a href="#">왕좌의 게임:라스트 워치</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h10.jpg">
+                </div>
+                <a href="#">섹스 앤 더 시티 시즌6</a>
+            </div>
+        </div>
+        <div class="contentslide2">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h11.jpg">
+                </div>
+                <a href="#">체르노빌</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h12.jpg">
+                </div>
+                <a href="#">트루 디텍티브 시즌1</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h13.jpg">
+                </div>
+                <a href="#">왓치맨</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h14.jpg">
+                </div>
+                <a href="#">밴쉬 시즌1</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/h15.jpg">
+                </div>
+                <a href="#">왕좌의 게임 시즌8</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content_title">
+    영화플러스 추천영화<span>더보기 &#8250;</span>
+</div>
+<div id="content">
+    <div class="prev3">&#8249;</div>
+    <div class="next3">&#8250;</div>
+    <div class="contentimgs">
+        <div class="contentslide3">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m1.jpg">
+                    <div class="event">이벤트</div>
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                        <li>자막</li>
+                    </ul>
+                </div>
+                <a href="#">(자막)샹치와 텐 링즈의 전설</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m2.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">모가디슈</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m3.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">기적</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m4.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">랑종</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m5.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                        <li>자막</li>
+                    </ul>
+                </div>
+                <a href="#">(자막) 정글 크루즈</a>
+            </div>
+        </div>
+        <div class="contentslide3">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m6.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">프리 가이</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m7.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">인질</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m8.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">싱크홀</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m9.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">레미니센스</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m10.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">말리그넌트</a>
+            </div>
+        </div>
+        <div class="contentslide3">
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m11.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                        <li>자막</li>
+                    </ul>
+                </div>
+                <a href="#">(자막)스피릿</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m12.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">코다</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m13.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                        <li>자막</li>
+                    </ul>
+                </div>
+                <a href="#">(자막)블랙 위도우</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m14.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">이스케이프 룸 2:노 웨이 아웃</a>
+            </div>
+            <div class="content_box">
+                <div class="posterbox">
+                    <img src="imgs/main-img/m15.jpg">
+                    <ul class="movie_p">
+                        <li>개별구매</li>
+                    </ul>
+                </div>
+                <a href="#">최선의 삶</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal">
+    <div class="modal_out">X</div>
+    <div class="modal_content">
+        <ul class=tag>
+            <li><img src="imgs/main-img/tag.png">태그로 검색하기</li>
+            <li><img src="imgs/main-img/search.png">검색어 입력하기</li>
+        </ul>
+        <div class="modal_box">
+            <div class="searchbox">
+                <img src="imgs/main-img/search.png" class="searchpng">
+                <input type="search" class="searchbar" placeholder="검색어를 입력해 주세요">
+            </div>
+            <ul class="list_menu">
+                <li>실시간 인기검색어</li>
+                <li><a href="#">VOD</a></li>
+                <li><a href="#">LIVE</a></li>
+                <li><a href="#">영화</a></li>
+            </ul>
+            <ul class="list">
+                <li></li>
+                <li>
+                    <ul class="list_vod">
+                        <li>1<a href="#">런닝맨</a></li>
+                        <li>2<a href="#">연모</a></li>
+                        <li>3<a href="#">동상이몽2_너는 내 운명</a></li>
+                        <li>4<a href="#">미운 우리 새끼</a></li>
+                        <li>5<a href="#">지금,헤어지는 중입니다</a></li>
+                        <li>6<a href="#">놀면 뭐하니?</a></li>
+                        <li>7<a href="#">전지적 참견시점</a></li>
+                        <li>8<a href="#">피의 게임</a></li>
+                        <li>9<a href="#">안싸우면 다행이야</a></li>
+                        <li>10<a href="#">나 혼자 산다</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list_vod">
+                        <li>1<a href="#">더뉴스 2부</a></li>
+                        <li>2<a href="#">두시탈출 컬투쇼</a></li>
+                        <li>3<a href="#">사건파일 24</a></li>
+                        <li>4<a href="#">뉴스브리핑</a></li>
+                        <li>5<a href="#">나 잡아봐라! 특집 2</a></li>
+                        <li>6<a href="#">[거침없이 하이킥] [30회] 유간호사와 영화 보고 두려움에 떠는 준하/유미 부탁으로 키높이 구두 신는 민호</a></li>
+                        <li>7<a href="#">박준형,정경미의 2시 만세</a></li>
+                        <li>8<a href="#">함께 들어요 최신가요</a></li>
+                        <li>9<a href="#">시즌1 제주 캠핑카 국도 여행(2)</a></li>
+                        <li>10<a href="#">2시의 데이트 뮤지, 안영미입니다</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list_vod">
+                        <li>1<a href="#">라이징 호크</a></li>
+                        <li>2<a href="#">(자막) 해리포터와 마법사의 돌</a></li>
+                        <li>3<a href="#">(자막) 해리포터와 비밀의 방</a></li>
+                        <li>4<a href="#">모가디슈</a></li>
+                        <li>5<a href="#">(자막) 해리포터와 아즈카반의 죄수</a></li>
+                        <li>6<a href="#">분노의 질주: 더 맥시멈</a></li>
+                        <li>7<a href="#">(자막) 해리포터와 불의 잔</a></li>
+                        <li>8<a href="#">쇼미더고스트</a></li>
+                        <li>9<a href="#">반창꼬</a></li>
+                        <li>10<a href="#">더 킹</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="modal_box2">
+            <div class="modal2_title">VOD 영화
+                <div class="underline"></div>
+            </div>
+            <div class="modal2_content">
+                <div class="modal2_c_1">
+                    방영요일
+                    <ul class="content_day">
+                        <li><a href="#">월</a></li>
+                        <li><a href="#">화</a></li>
+                        <li><a href="#">수</a></li>
+                        <li><a href="#">목</a></li>
+                        <li><a href="#">금</a></li>
+                        <li><a href="#">토</a></li>
+                        <li><a href="#">일</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    장르
+                    <ul class="content_day">
+                        <li><a href="#">버라이어티</a></li>
+                        <li><a href="#">리얼리티</a></li>
+                        <li><a href="#">스포츠</a></li>
+                        <li><a href="#">여행</a></li>
+                        <li><a href="#">푸드</a></li>
+                        <li><a href="#">라이프</a></li>
+                        <li><a href="#">뮤직</a></li>
+                        <li><a href="#">뷰티</a></li>
+                        <li><a href="#">오디션</a></li>
+                        <li><a href="#">경연</a></li>
+                        <li><a href="#">가족</a></li>
+                        <li><a href="#">토크</a></li>
+                        <li><a href="#">연애</a></li>
+                        <li><a href="#">애완동물</a></li>
+                        <li><a href="#">시상식</a></li>
+                        <li><a href="#">영화제</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    드라마
+                    <ul class="content_day">
+                        <li><a href="#">공포</a></li>
+                        <li><a href="#">로맨스</a></li>
+                        <li><a href="#">시트콤</a></li>
+                        <li><a href="#">코미디</a></li>
+                        <li><a href="#">복수</a></li>
+                        <li><a href="#">가족</a></li>
+                        <li><a href="#">범죄</a></li>
+                        <li><a href="#">수사</a></li>
+                        <li><a href="#">청춘</a></li>
+                        <li><a href="#">SF/판타지</a></li>
+                        <li><a href="#">웹드라마</a></li>
+                        <li><a href="#">의학</a></li>
+                        <li><a href="#">정치</a></li>
+                        <li><a href="#">법정</a></li>
+                        <li><a href="#">액션</a></li>
+                        <li><a href="#">미스터리</a></li>
+                        <li><a href="#">스릴러</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    시사교양
+                    <ul class="content_day">
+                        <li><a href="#">뉴스</a></li>
+                        <li><a href="#">시사</a></li>
+                        <li><a href="#">다큐</a></li>
+                        <li><a href="#">교양</a></li>
+                        <li><a href="#">역사</a></li>
+                        <li><a href="#">여행</a></li>
+                        <li><a href="#">푸드</a></li>
+                        <li><a href="#">라이프</a></li>
+                        <li><a href="#">뮤직</a></li>
+                        <li><a href="#">건강</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    스포츠
+                    <ul class="content_day">
+                        <li><a href="#">야구</a></li>
+                        <li><a href="#">골프</a></li>
+                        <li><a href="#">축구</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    키즈
+                    <ul class="content_day">
+                        <li><a href="#">또봇</a></li>
+                        <li><a href="#">시크릿 쥬쥬</a></li>
+                        <li><a href="#">캐리TV</a></li>
+                        <li><a href="#">카봇</a></li>
+                        <li><a href="#">콩순이</a></li>
+                        <li><a href="#">토마스</a></li>
+                        <li><a href="#">동요</a></li>
+                        <li><a href="#">핑크퐁</a></li>
+                        <li><a href="#">지니키즈</a></li>
+                        <li><a href="#">메카드</a></li>
+                        <li><a href="#">라바</a></li>
+                        <li><a href="#">TV만화</a></li>
+                        <li><a href="#">티디</a></li>
+                        <li><a href="#">옥토넛</a></li>
+                        <li><a href="#">주니토니</a></li>
+                        <li><a href="#">교육</a></li>
+                        <li><a href="#">어린이</a></li>
+                        <li><a href="#">동화</a></li>
+                        <li><a href="#">영어</a></li>
+                        <li><a href="#">선물공룡 디보</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    애니메이션
+                    <ul class="content_day">
+                        <li><a href="#">추리</a></li>
+                        <li><a href="#">액션</a></li>
+                        <li><a href="#">어드벤처</a></li>
+                        <li><a href="#">학원</a></li>
+                        <li><a href="#">스포츠</a></li>
+                        <li><a href="#">순정</a></li>
+                        <li><a href="#">일상</a></li>
+                        <li><a href="#">코믹</a></li>
+                        <li><a href="#">SF</a></li>
+                        <li><a href="#">판타지</a></li>
+                        <li><a href="#">19</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1">
+                    해외시리즈
+                    <ul class="content_day">
+                        <li><a href="#">미드</a></li>
+                        <li><a href="#">중드</a></li>
+                        <li><a href="#">일드</a></li>
+                        <li><a href="#">대드</a></li>
+                        <li><a href="#">영드</a></li>
+                        <li><a href="#">리얼리티</a></li>
+                        <li><a href="#">다큐멘터리</a></li>
+                        <li><a href="#">로맨스</a></li>
+                        <li><a href="#">SF판타지</a></li>
+                        <li><a href="#">코미디</a></li>
+                        <li><a href="#">푸드</a></li>
+                        <li><a href="#">사극</a></li>
+                        <li><a href="#">현대극</a></li>
+                        <li><a href="#">시대극</a></li>
+                        <li><a href="#">액션</a></li>
+                        <li><a href="#">무협</a></li>
+                        <li><a href="#">메디컬</a></li>
+                        <li><a href="#">동물</a></li>
+                        <li><a href="#">공포</a></li>
+                    </ul>
+                </div>
+                <div class="modal2_c_1" style="margin-bottom: 60px;border-bottom: none;">
+                    채널
+                    <ul class="content_day">
+                        <li><a href="#">KBS</a></li>
+                        <li><a href="#">MBC</a></li>
+                        <li><a href="#">SBS</a></li>
+                        <li><a href="#">TV CHOSUN</a></li>
+                        <li><a href="#">채널A</a></li>
+                        <li><a href="#">MBN</a></li>
+                        <li><a href="#">EBS</a></li>
+                    </ul>
+                </div>
+                <ul class="modal2_bt">
+                    <li>선택 초기화</li>
+                    <li>검색</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="up">
+    <img src="imgs/main-img/up.png">
+</div>
+<footer th:replace="fragments/common :: footer">
+    <div id="ft_top">
+        <div id="notice">
+            <div class="noticeslide">
+                공지사항
+                <ul class="notice">
+                    <li><a href="#">wavve오리지널 '탱키박스' 시청 이벤트 안내</a></li>
+                    <li><a href="#">HBO 시리즈 신규 오픈 안내</a></li>
+                    <li><a href="#">wavve오리지널 '탱키박스' 시청 이벤트 안내</a></li>
+                    <li><a href="#">HBO 시리즈 신규 오픈 안내</a></li>
+                </ul>
+            </div>
+            <div class="noticebt">
+                <div class="left">
+                    &#8249;
+                </div>
+                <div class="right">
+                    &#8250;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footerbt">
+        <div class="btn-float-box">
+            <div class="btn-float btn-top">
+                <button class="button">
+                    <span class="a11y-hidden"></span>
+                </button>
+            </div>
+        </div>
+        <div class="ft0">
+            <ul class="ft1">
+                <li><a href="#" th:href="@{https://www.wavve.com/customer/company.html}" target='_blank'>회사소개</a>
+                </li>
+                <li><a href="#" th:href="@{https://wavve.career.greetinghr.com/}" target='_blank'>인재채용</a></li>
+                <li><a href="#" th:href="@{https://www.wavve.com/customer/service/}">서비스 소개</a></li>
+                <li><a href="#" th:href="@{https://www.wavve.com/customer/agreement}">이용약관</a></li>
+                <li><a href="#" th:href="@{https://www.wavve.com/customer/agreement?category=privacy}">개인정보 처리방침</a>
+                </li>
+                <li><a href="#" th:href="@{https://www.wavve.com/customer/notice_list}">고객센터</a></li>
+            </ul>
+            <div class="sns">
+                <div class=waveon>
+                    <img src="imgs/main-img/waveon.png">
+                    <select class="waveonselect">
+                        <option>사업자용 웨이브 가입</option>
+                        <option>웨이브온 서비스 소개</option>
+                        <option>웨이브온 PC방 서비스</option>
+                        <option>웨이브온 도서관 서비스</option>
+                        <option>웨이브온 병원 서비스</option>
+                        <option>웨이브온 숙박 서비스</option>
+                        <option>웨이브온 일반 서비스</option>
+                    </select>
+                </div>
+                <div class="snsbt">
+                    <a href="#"><img src="imgs/main-img/sns1.png"></a>
+                </div>
+                <div class="snsbt">
+                    <a href="#"><img src="imgs/main-img/sns2.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="ft3">
+            <br>
+            <ul class="ful">
+                <li>콘텐츠 웨이브 주식회사</li>
+                <li>대표이사 이태현</li>
+                <li>고객센터 1599-9709 (평일 09:00~18 / 점심시간 12:00~13:00 / 주말 및 공휴일 휴무)</li>
+            </ul>
+            <ul class="ful">
+                <li>사업자 등록번호 220-88-38020</li>
+                <li>호스팅서비스제공자:마이크로소프트 유한회사</li>
+            </ul>
+            <ul class="ful">
+                <li>통신판매업 신고번호 : 제 2021-서울영등포-0585호</li>
+                <li>통신판매업 정보 공개 : http://www.ftc.go.kr/bizCommPop.do?wrkr_no=220-88-38020</li>
+            </ul>
+            <ul class="ful">
+                <li>서울특별시 영등포구 여의나루로 60 포스트타워 19층</li>
+                <li>전자우편주소 : helpdesk@wavve.com</li>
+            </ul>
+            <ul class="ful">
+                <li>Copyright© 콘텐츠웨이브(주) All rights reserved.</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.clone_wavve.user.UserMapper">
+    <insert id="insUser">
+        INSERT INTO w_user
+            (w_id, w_pw)
+        VALUES
+            (#{w_id}, #{w_pw})
+    </insert>
+
+    <select id="selUser" resultType="UserEntity">
+        SELECT * FROM w_user
+        WHERE w_id = #{w_id}
+    </select>
+</mapper>
