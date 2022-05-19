@@ -23,7 +23,7 @@
 <body>
 <th:block th:fragment="header">
     <div div id="top_fixed">
-        <div id="admin" th:if="${session.loginUser == null}">
+        <div id="admin" sec:authorize="isAnonymous()">
             <div class="admin_wrap">
                 <ul class="admin">
                     <li><a th:href="@{/user/login}">로그인</a></li>
@@ -32,7 +32,7 @@
                 </ul>
             </div>
         </div>
-        <div id="admin-out" th:if="${session.loginUser != null}">
+        <div id="admin-out" sec:authorize="isAuthenticated()">
             <div class="admin_wrap">
                 <ul class="admin">
                     <li><a th:href="@{/user/logout}">로그아웃</a></li>

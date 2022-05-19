@@ -10,6 +10,13 @@
 
     <select id="selUser" resultType="UserEntity">
         SELECT * FROM w_user
-        WHERE w_id = #{w_id}
+        <where>
+            <if test=" w_id != null and w_id != '' ">
+                w_id = #{w_id}
+            </if>
+            <if test=" iuser > 0 ">
+                AND iuser = #{iuser}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -198,24 +198,26 @@ button, input, textarea {
     height: 22px;
 }
 
-.btn-purple, .btn-purple>a {
+.btn-purple, .btn-purple > input {
     text-align: center;
 }
 
-.btn-purple-dark>a, .btn-purple>a {
+.btn-purple-dark > input, .btn-purple > input {
     background: #1351f9;
 }
 
-.btn-purple>a {
+.btn-purple > input {
     display: block;
     height: 60px;
     line-height: 60px;
     border-radius: 30px;
     font-size: 18px;
     color: #fff;
+    border: none;
+    width: 100%;
 }
 
-.btn-purple, .btn-purple>a {
+.btn-purple, .btn-purple > input {
     text-align: center;
 }
 

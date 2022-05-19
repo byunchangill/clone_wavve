@@ -7,4 +7,6 @@ public class UserEntity {
     private int iuser;
     private String w_id;
     private String w_pw;
+    private String rdt;
+    private String mdt;
 }

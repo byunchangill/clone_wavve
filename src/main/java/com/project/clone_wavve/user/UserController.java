@@ -17,13 +17,6 @@ public class UserController {
     public void login() {
     }
 
-    @PostMapping("/login")
-    public String loginPost(UserEntity entity){
-            int result = userService.login(entity);
-            System.out.println("result : " + result);
-            return "redirect:/";
-    }
-
     @GetMapping("/join")
     public void join() {
     }

@@ -203,13 +203,14 @@ input, button, select {
     font-family: 'NotoSans', sans-serif;
 }
 
-.btn-wavve-join a {
+.btn-wavve-join input {
     padding: 20px 0;
     color: #fff;
     background-color: #717171;
+    width: 100%;
 }
 
-.btn-wavve-join a, .btn-sns-join a {
+.btn-wavve-join input, .btn-sns-join a {
     display: block;
     text-align: center;
     font-size: 18px;
@@ -295,14 +296,6 @@ a {
 .google-img {
     max-width: 32px;
     max-height: 32px;
-}
-
-.btn-wavve-join a, .btn-sns-join a {
-    display: block;
-    text-align: center;
-    font-size: 18px;
-    line-height: 20px;
-    border-radius: 100px;
 }
 
 .txt-exclamation {
