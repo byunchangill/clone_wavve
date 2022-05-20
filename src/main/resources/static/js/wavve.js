@@ -1,11 +1,20 @@
 // 메뉴
 $(".menu>li").eq(1).stop().mouseover(function(){
     $(".submenu").stop().css("display","block")
-})
+});
 
 $(".menu>li").eq(1).stop().mouseleave(function(){
     $(".submenu").stop().css("display","none")
-})
+});
+
+// 포로필
+$(".nav > li").eq(0).stop().mouseover(function(){
+    $(".header-over-1depth").stop().css("display","block")
+});
+
+$(".nav > li").eq(0).stop().mouseleave(function(){
+    $(".header-over-1depth").stop().css("display","none")
+});
 
 //이미지슬라이
 var startp=screen.width/2+380;

@@ -17,7 +17,7 @@
     <link rel="stylesheet" th:href="@{/css/wavve.css}">
     <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script th:src="@{/js/wavve.js}" th:inline="javascript"></script>
+    <script th:src="@{/js/wavve.js}" defer></script>
     <title>웨이브(wavve)</title>
 </head>
 <body>
@@ -32,11 +32,31 @@
                 </ul>
             </div>
         </div>
-        <div id="admin-out" sec:authorize="isAuthenticated()">
-            <div class="admin_wrap">
-                <ul class="admin">
-                    <li><a th:href="@{/user/logout}">로그아웃</a></li>
-                    <li><a href="#">이용권</a></li>
+        <div class="header-nav" sec:authorize="isAuthenticated()">
+            <div class="wrap">
+                <ul class="nav">
+                    <li class="over-parent-1depth">
+                        <button type="button" data-util-menu="true" class="arrow">프로필1</button>
+                        <div class="header-over-1depth">
+                            <div class="profile-image-area"><img
+                                    src="https://img.wavve.com/service30/profile/0.png" alt="파란 파도"></div>
+                            <span class="name">프로필1</span><a href="#" data-util-menu="true" class="change">프로필
+                            편집</a><a href="#" data-util-menu="true" class="a11y-hidden">프로필 이미지 변경</a>
+                            <ul class="profile-menu-list">
+                                <li><a href="https://member.wavve.com/me" data-util-menu="true">회원정보 수정</a>
+                                </li>
+                                <li><a href="#" data-util-menu="true">성인 콘텐츠 설정</a></li>
+                                <li>
+                                    <a type="button" data-util-menu="true">알림함<span
+                                            class="alarm-count">0</span></a>
+                                </li>
+                                <li>
+                                    <a type="button" data-util-menu="true" th:href="@{/user/logout}">로그아웃</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/voucher/index.html" class="">이용권</a></li>
                     <li><a href="#">이벤트</a></li>
                 </ul>
             </div>
