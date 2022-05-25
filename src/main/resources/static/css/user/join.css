@@ -151,12 +151,7 @@ label {
     vertical-align: middle;
 }
 
-.member-layout input[type="text"].input-style02 {
-    padding: 0 90px 0 20px;
-    width: 100%;
-}
-
-.member-layout input[type="text"].input-style01, .member-layout input[type="number"].input-style01, .member-layout input[type="email"].input-style01, .member-layout input[type="password"].input-style01, .member-pop-wrap input[type="password"].input-style01 {
+.input-style01 {
     width: 100%;
     font-size: 15px;
     letter-spacing: -0.9px;
@@ -166,10 +161,22 @@ label {
     background-color: #2f2f2f;
     border: none;
     padding-left: 10px;
+    outline: none;
+}
+
+.error-msg {
+    border: 1px solid #ff27a3;
 }
 
 .login-error-gray {
     color: #a5a5a5;
+    background: url(/imgs/item-icon/icon-gray.png) no-repeat left 2px;
+
+}
+
+.login-error-pink {
+    color: #ff27a3;
+    background: url(/imgs/item-icon/ico-error-pink.png) no-repeat left 2px;
 }
 
 .login-error-gray, .login-error-red, .login-error-red, .login-error-purple, .login-error-pink {

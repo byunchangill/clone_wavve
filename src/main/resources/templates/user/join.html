@@ -3,6 +3,8 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
+    <script defer th:src="@{/js/user/join.js}"></script>
     <title>wavve(웨이브)-회원가입</title>
 </head>
 <body>
@@ -27,9 +29,7 @@
                 <span>이메일과 비밀번호</span>만으로 <br>
                 <span>wavve를 즐길 수</span> 있어요!
             </h2>
-            <form th:action="@{/user/join}" th:object="${userEntity}" autocomplete="off" id="myFrm" method="post" name="myFrm" novalidate="true">
-                <input name="__RequestVerificationToken" type="hidden"
-                       value="Q3SCD02oSKkxuuK1fTKEzL47XWfqRMNDCzxXjWhmVZD4ZjLtwzBIEqqcm4EH1IstxEA1x6znewjPVr2cwXIVuUKfP9o1">
+            <form th:action="@{/user/join}" id="myJoinFrm" method="post" name="myJoinFrm">
                 <fieldset>
                     <legend>간편 회원가입 입력 폼</legend>
                     <ul class="join-input-box">
@@ -47,7 +47,7 @@
                                 <input type="password" name="w_pw" id="w_pw" placeholder="wavve 비밀번호 설정"
                                        class="input-style01 input-style02" maxlength="20" required>
                             </label>
-                            <button type="button" class="btn-input" onclick="onPwdChanged(this); return false;">show
+                            <button class="btn-input" onclick="onPwShow(this); return false;">show
                             </button>
                             <p class="login-error-gray" id="pw-error-alert">
                                 비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.

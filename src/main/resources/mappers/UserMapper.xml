@@ -4,19 +4,18 @@
     <insert id="insUser">
         INSERT INTO w_user
             (w_id, w_pw)
-        VALUES
-            (#{w_id}, #{w_pw})
+        VALUES (#{w_id}, #{w_pw})
     </insert>
 
     <select id="selUser" resultType="UserEntity">
         SELECT * FROM w_user
-        <where>
-            <if test=" w_id != null and w_id != '' ">
-                w_id = #{w_id}
-            </if>
-            <if test=" iuser > 0 ">
-                AND iuser = #{iuser}
-            </if>
-        </where>
+        WHERE w_id = #{w_id}
+        AND iuser = #{iuser}
+    </select>
+
+    <select id="idChk" resultType="UserEntity">
+        SELECT *
+        FROM w_user
+        WHERE w_id = #{w_id}
     </select>
 </mapper>

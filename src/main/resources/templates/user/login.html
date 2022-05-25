@@ -5,6 +5,7 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
+    <script defer th:src="@{/js/user/login.js}"></script>
     <title>웨이브 로그인</title>
 </head>
 
@@ -14,20 +15,21 @@
             <h1 tabindex="0">로그인</h1>
             <div class="join-sns-box">
                 <h2 tabindex="0" class="login-box-hd wavve-hd">wavve 계정으로 로그인</h2>
-                <form th:action="@{/user/login}" method="post">
+                <form th:action="@{/user/login}" method="post" id="myLoginFrm" name="myLoginFrm">
                     <fieldset>
                         <legend>로그인 양식</legend>
                         <ul class="input-wrap01">
                             <li>
                                 <label>
-                                    <input type="text" name="w_id" placeholder="이메일 주소 또는 아이디" class="input-style01">
+                                    <input type="text" id="w_id" name="w_id" placeholder="이메일 주소 또는 아이디" class="input-style01">
                                 </label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="password" name="w_pw" placeholder="비밀번호" class="input-style01">
+                                    <input type="password" id="w_pw" name="w_pw" placeholder="비밀번호" class="input-style01">
                                 </label>
                             </li>
+                            <p class="login-error-red" id="login-error">입력하신 정보에 해당하는 계정을 찾을 수 없습니다.<br>ID, PW를 확인해 주세요.</p>
                         </ul>
                         <ul class="checkbox-wrap01">
                             <li class="check-style check-style-dark">

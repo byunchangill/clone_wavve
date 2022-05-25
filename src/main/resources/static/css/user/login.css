@@ -293,6 +293,15 @@ a {
     color: #a5a5a5;
 }
 
+.login-error-red {
+    color: rgb(255, 39, 163);
+    font-size: 14px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAW1JREFUOBHNVDtOw0AQfWMgTUq4AAUQmjSkoeECtChIEfScgIbGDQ0noA+KRETLBWhokoaGX8EFSEkTwMPM7K69NpZQUIqMZM969s3b3Zm3BhbVqG5jnHKC60EXnPUA6ghmVZ4JwCNQMsBhb0gpZdXcX2TcHq5jOr2RRJLEC2TJHZaX3vH1vYYk25MFTmUBRqNxQA/dt5iwROaJ7oXoEs3tcxp3PmOwjnlntIKPxzMhPBHC3Sqh4fVo3Loac6ufWuCPl+IMryXxlg+sRno02VGYDF6SXsI494YTvNbWW0GmxZYa1R0NzBshIXjDaU2tSS5akGnXtNizmOGt25YVkUn7tWuzmMOrbMxisom1P8zEnug1/szHKhfTn4tEZCJI1VGN0dPRZk0YDi953goyVbYI0nQUZr3nrf5tJeT0pgLWPG8FmVwRU7YJMkw7T8/H++WIfDnhsl6tMDfXG1Ai0xXmdjfDdv/71wj5i+d/AEudrdvpOu94AAAAAElFTkSuQmCC) left 2px no-repeat;
+    margin-top: 14px;
+    padding-left: 25px;
+    visibility: visible;
+}
+
 .or-bar-right {
     right: 0;
 }

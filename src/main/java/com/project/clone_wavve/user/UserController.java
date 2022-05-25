@@ -3,9 +3,10 @@ package com.project.clone_wavve.user;
 import com.project.clone_wavve.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -26,5 +27,14 @@ public class UserController {
         System.out.println(userEntity);
         int result = userService.join(userEntity);
         return "redirect:login";
+    }
+
+    // id 중복 체크(회원가입)
+    @GetMapping("/idChk/{w_id}")
+    @ResponseBody
+    public Map<String, Integer> idChk(@PathVariable String w_id) {
+        Map<String, Integer> res = new HashMap();
+        res.put("result", userService.idChk(w_id));
+        return res;
     }
 }

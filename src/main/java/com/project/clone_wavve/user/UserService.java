@@ -1,8 +1,6 @@
 package com.project.clone_wavve.user;
 
-import com.project.clone_wavve.UserUtils;
 import com.project.clone_wavve.user.model.UserEntity;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,10 +9,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
-
-    @Autowired
-    private UserUtils userUtils;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -30,22 +24,12 @@ public class UserService {
         }
     }
 
-    public int login(UserEntity entity) {
-        UserEntity dbUser = null;
-        try {
-            dbUser = userMapper.selUser(entity);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
+    public int idChk(String w_id) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setW_id(w_id);
 
-        if(dbUser == null) {
-            return 2;
-        } else if(!BCrypt.checkpw(entity.getW_id(), dbUser.getW_pw())) {
-            return 3;
-        }
-        dbUser.setW_pw(null);
-        userUtils.setLoginUser(dbUser);
-        return 1;
+        UserEntity result = userMapper.idChk(userEntity);
+        return result == null ? 1 : 0;
     }
+
 }
