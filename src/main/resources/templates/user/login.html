@@ -5,7 +5,8 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
-    <script defer th:src="@{/js/user/login.js}"></script>
+    <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
+    <script th:src="@{/js/user/login.js}" defer></script>
     <title>웨이브 로그인</title>
 </head>
 
@@ -33,11 +34,11 @@
                         </ul>
                         <ul class="checkbox-wrap01">
                             <li class="check-style check-style-dark">
-                                <input type="checkbox" id="id-save" class="check-blue-dark">
+                                <input type="checkbox" id="id-save" name="id_save" class="check-blue-dark">
                                 <label for="id-save">아이디 저장</label>
                             </li>
                             <li class="check-style check-style-dark">
-                                <input type="checkbox" id="login-auto" class="check-blue-dark">
+                                <input type="checkbox" id="login-auto" name="remember-me" class="check-blue-dark">
                                 <label for="login-auto">자동 로그인</label>
                             </li>
                         </ul>

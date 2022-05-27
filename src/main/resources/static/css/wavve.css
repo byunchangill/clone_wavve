@@ -668,6 +668,7 @@ header {
     position: fixed;
     bottom: 2%;
     right: 2%;
+    z-index: 1;
 }
 
 /* 바닥글 */

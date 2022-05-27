@@ -172,30 +172,37 @@ button, input, textarea {
     color: #a5a5a5;
 }
 
-.member-layout input[type=checkbox].check-blue-dark+label:before {
-    border: 1px solid #a5a5a5;
-}
-
-.member-layout input[type=checkbox].check-blue-dark+label:before {
-    border: 1px solid #a5a5a5;
-}
-
-.check-style input[type=checkbox].check-blue-dark+label:before {
+.check-blue-dark+label:before {
     border: 1px solid #d9d9d9;
     vertical-align: middle;
 }
 
-.check-style input[type=checkbox]+label:before {
-    content: " ";
-    display: inline-block;
-    width: 21px;
-    height: 21px;
-    margin-right: 8px;
+.check-style input[id="id-save"]:checked + label:before {
+    content: "\2714";
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    border: 1px solid #1351f9;
+    background-color: #1351f9;
+
+}
+
+.check-style input[id="login-auto"]:checked + label:before {
+    content: "\2714";
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    border: 1px solid #1351f9;
+    background-color: #1351f9;
 }
 
 .check-style input[type=checkbox]+label:before {
-    width: 22px;
-    height: 22px;
+    content: "";
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    margin-right: 8px;
 }
 
 .btn-purple, .btn-purple > input {
@@ -299,7 +306,6 @@ a {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAW1JREFUOBHNVDtOw0AQfWMgTUq4AAUQmjSkoeECtChIEfScgIbGDQ0noA+KRETLBWhokoaGX8EFSEkTwMPM7K69NpZQUIqMZM969s3b3Zm3BhbVqG5jnHKC60EXnPUA6ghmVZ4JwCNQMsBhb0gpZdXcX2TcHq5jOr2RRJLEC2TJHZaX3vH1vYYk25MFTmUBRqNxQA/dt5iwROaJ7oXoEs3tcxp3PmOwjnlntIKPxzMhPBHC3Sqh4fVo3Loac6ufWuCPl+IMryXxlg+sRno02VGYDF6SXsI494YTvNbWW0GmxZYa1R0NzBshIXjDaU2tSS5akGnXtNizmOGt25YVkUn7tWuzmMOrbMxisom1P8zEnug1/szHKhfTn4tEZCJI1VGN0dPRZk0YDi953goyVbYI0nQUZr3nrf5tJeT0pgLWPG8FmVwRU7YJMkw7T8/H++WIfDnhsl6tMDfXG1Ai0xXmdjfDdv/71wj5i+d/AEudrdvpOu94AAAAAElFTkSuQmCC) left 2px no-repeat;
     margin-top: 14px;
     padding-left: 25px;
-    visibility: visible;
 }
 
 .or-bar-right {

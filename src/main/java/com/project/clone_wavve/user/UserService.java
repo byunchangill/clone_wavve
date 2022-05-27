@@ -1,5 +1,6 @@
 package com.project.clone_wavve.user;
 
+import com.project.clone_wavve.config.ProviderType;
 import com.project.clone_wavve.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ public class UserService {
         // 비밀번호 암호화
         String hashedWpw = passwordEncoder.encode(entity.getW_pw());
         entity.setW_pw(hashedWpw);
+        entity.setProvider(ProviderType.LOCAL.toString());
         try {
             return userMapper.insUser(entity);
         } catch (Exception e) {
@@ -31,5 +33,4 @@ public class UserService {
         UserEntity result = userMapper.idChk(userEntity);
         return result == null ? 1 : 0;
     }
-
 }
