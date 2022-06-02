@@ -1,12 +1,11 @@
 package com.project.clone_wavve.user;
 
+import com.project.clone_wavve.common.MyConst;
 import com.project.clone_wavve.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +14,15 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MyConst myConst;
 
     @GetMapping("/login")
-    public void login(UserEntity userEntity) {
+    public void login() {
     }
 
     @GetMapping("/join")
-    public void join(UserEntity userEntity) {
+    public void join() {
     }
 
     @PostMapping("/join")
@@ -41,5 +42,13 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public void profile() {}
+    public void profile() {
+
+    }
+
+    @ResponseBody
+    @PostMapping("/profile")
+    public int profile(@RequestBody UserEntity entity) {
+       return userService.upNickname(entity);
+    }
 }

@@ -398,3 +398,14 @@ $(".next3").click(function(){
         $(".next3").addClass("off");
     }
 });
+
+const localhostElem = document.querySelector('#localConst');
+const iuser = localhostElem.dataset.iuser;
+const wid = localhostElem.dataset.w_id;
+const nickname = localhostElem.dataset.w_nickname;
+const profileImg = localhostElem.dataset.profileImg;
+
+console.log(iuser);
+console.log(wid);
+console.log(nickname);
+console.log(profileImg);

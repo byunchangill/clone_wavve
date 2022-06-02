@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -28,14 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests() // 인증 시작
-                .antMatchers("/user/profile").hasRole("USER") //로그인 안됐을때 못들어가게
+                .antMatchers("/user/profile").authenticated() //로그인 안됐을때 못들어가게
                 .anyRequest().permitAll()//나머지는 다 통과
                 .and()
                     .formLogin()
                         .loginPage("/user/login")
                         .usernameParameter("w_id")
                         .passwordParameter("w_pw")
-                        .defaultSuccessUrl("/", false)
                         .permitAll()
                 .and()
                     .rememberMe() // 자동로그인

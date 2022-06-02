@@ -112,6 +112,7 @@ label {
     color: #fff;
     background-color: #2f2f2f;
     border: 0;
+    outline: none;
 }
 
 input[type=password], input[type=tel], input[type=text], textarea {

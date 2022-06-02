@@ -18,4 +18,10 @@
         FROM w_user
         WHERE w_id = #{w_id}
     </select>
+
+    <update id="upNickname">
+        UPDATE w_user
+        SET w_nickname = #{w_nickname}
+        WHERE iuser = ${iuser}
+    </update>
 </mapper>
