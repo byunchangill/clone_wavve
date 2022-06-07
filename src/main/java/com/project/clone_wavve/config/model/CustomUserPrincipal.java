@@ -8,16 +8,27 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 public class CustomUserPrincipal implements UserDetails {
-    @Getter private UserEntity user;
+    @Getter
+    private UserEntity user;
 
     public CustomUserPrincipal(UserEntity user) {
         this.user = user;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(user.getAuth()!=null?user.getAuth():"ROLE_USER"));
+    }
+
     public static CustomUserPrincipal create(UserEntity user) {
         return new CustomUserPrincipal(user);
+    }
+
+    public Map<String, Object> getAttributes() {
+        return null;
     }
 
     @Override
@@ -48,10 +59,5 @@ public class CustomUserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
 }

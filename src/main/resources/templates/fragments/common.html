@@ -22,10 +22,10 @@
 </head>
 <body>
 <th:block th:fragment="header">
-        <span id="localConst" sec:authorize="isAuthenticated()"
-              th:with="auth=${#authentication.getPrincipal().getUser}"
-              th:attr="data-iuser=${auth.iuser}, data-profile=${auth.profileImg},
-                       data-nickname=${auth.w_nickname},
+    <span id="localConst" sec:authorize="isAuthenticated()"
+          th:with="auth=${#authentication.getPrincipal().getUser}"
+          th:attr="data-iuser=${auth.iuser}, data-profileImg=${auth.profileImg},
+                       data-w_nickname=${auth.w_nickname},
                        data-provider=${auth.provider}, data-w_id=${auth.w_id},
                        data-rdt=${auth.rdt}"></span>
     <div div id="top_fixed">
@@ -42,29 +42,28 @@
             <div class="wrap">
                 <ul class="nav">
                     <li class="over-parent-1depth">
-                        <button type="button" data-util-menu="true" class="arrow">프로필1</button>
+                        <button type="button" class="arrow" id="mainNickname"></button>
                         <div class="header-over-1depth">
                             <div class="profile-image-area">
                                 <img src="https://img.wavve.com/service30/profile/0.png" alt="파란 파도">
                             </div>
-                            <span class="name">프로필1
-                            </span>
-                            <a href="/user/profile" data-util-menu="true" class="change">프로필 편집</a>
-                            <a href="#" data-util-menu="true" class="a11y-hidden">프로필 이미지 변경</a>
+                            <span class="name"></span>
+                            <a href="/user/profile" class="change">프로필 편집</a>
+                            <a href="#" class="a11y-hidden">프로필 이미지 변경</a>
                             <ul class="profile-menu-list">
                                 <li>
-                                    <a href="https://member.wavve.com/me" data-util-menu="true">회원정보 수정</a>
+                                    <a href="https://member.wavve.com/me">회원정보 수정</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-util-menu="true">성인 콘텐츠 설정</a>
+                                    <a href="#">성인 콘텐츠 설정</a>
                                 </li>
                                 <li>
-                                    <a type="button" data-util-menu="true">알림함
+                                    <a type="button">알림함
                                         <span class="alarm-count">0</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a type="button" data-util-menu="true" th:href="@{/user/logout}">로그아웃</a>
+                                    <a type="button" th:href="@{/user/logout}">로그아웃</a>
                                 </li>
                             </ul>
                         </div>

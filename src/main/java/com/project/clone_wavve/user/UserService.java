@@ -3,18 +3,16 @@ package com.project.clone_wavve.user;
 import com.project.clone_wavve.config.AuthenticationFacade;
 import com.project.clone_wavve.config.ProviderType;
 import com.project.clone_wavve.user.model.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private AuthenticationFacade auth;
+    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationFacade auth;
 
     public int join(UserEntity entity) {
         // 비밀번호 암호화
@@ -40,9 +38,25 @@ public class UserService {
 
     //닉네임, 이미지 변경
     public int upNickname(UserEntity entity) {
-        entity.setIuser(auth.getLoginUserPk());
-        auth.getLoginUser().setW_nickname(entity.getW_nickname());
+/*        UserEntity loginUser = auth.getLoginUser();
+        entity.setIuser(loginUser.getIuser());
+
         int result = userMapper.upNickname(entity);
+        if (result == 1) {
+            System.out.println("nickname : " + entity.getW_nickname());
+            loginUser.setW_nickname(entity.getW_nickname());
+        }
+        return result;*/
+
+        entity.setIuser(auth.getLoginUserPk());
+
+        auth.getLoginUser().setW_nickname(entity.getW_nickname());
+
+        int result = userMapper.upNickname(entity);
+        if (result == 1) {
+            System.out.println("nickname : " + entity.getW_nickname());
+            entity.setW_nickname(entity.getW_nickname());
+        }
         return result;
     }
 }

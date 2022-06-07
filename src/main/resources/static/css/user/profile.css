@@ -193,7 +193,7 @@ input[type=text] {
     text-align: center;
 }
 
-.btn-gray-line>a {
+.btn-gray-line > a {
     display: block;
     border: 1px solid #a5a5a5;
     border-radius: 30px;
@@ -203,7 +203,7 @@ input[type=text] {
     color: #a5a5a5;
 }
 
-.btn-purple>a {
+.btn-purple > input {
     display: block;
     height: 60px;
     line-height: 60px;
@@ -216,11 +216,24 @@ input[type=text] {
     background-color: #5e5e5e;
 }
 
-.common-page .common-btn-wrap .btn-purple a {
+.common-page .common-btn-wrap .btn-purple input {
     background-color: #1351f9;
 }
 
 .common-page .common-btn-wrap .btn-gray-line a, .common-page .common-btn-wrap .btn-purple a {
+    width: 236px;
+    height: 52px;
+    font-size: 16px;
+    line-height: 50px;
+    color: #fff;
+    border: none;
+}
+
+.common-page .common-btn-wrap .btn-purple input {
+    background-color: #1351f9;
+}
+
+.common-page .common-btn-wrap .btn-gray-line input, .common-page .common-btn-wrap .btn-purple input {
     width: 236px;
     height: 52px;
     font-size: 16px;

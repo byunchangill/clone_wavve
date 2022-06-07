@@ -10,13 +10,13 @@
     <title>프로필수정 : 웨이브</title>
 </head>
 <body>
-<span id="localConst" sec:authorize="isAuthenticated()"
-      th:with="auth=${#authentication.getPrincipal().getUser}"
-      th:attr="data-iuser=${auth.iuser}, data-profile=${auth.profileImg},
-                       data-nickname=${auth.w_nickname},
-                       data-provider=${auth.provider}, data-w_id=${auth.w_id},
-                       data-rdt=${auth.rdt}"></span>
-<div id="app" class="">
+<div id="app" class="" >
+    <div id="localConst" th:with="auth=${#authentication.getPrincipal().getUser()}"
+         th:attr="data-iuser=${auth.iuser}, data-profileImg=${auth.profileImg},
+                                   data-w_nickname=${auth.w_nickname},
+                                   data-provider=${auth.provider}, data-w_id=${auth.w_id},
+                                   data-rdt=${auth.rdt}">
+    </div>
     <div class="body">
         <div class="common-page dark-theme">
             <div class="wrap">
@@ -27,21 +27,22 @@
                     </a>
                 </h1>
             </div>
-            <form id="profile-form" th:action="@{/user/profile}" method="post" class="tAc">
+            <form id="profile-form" th:action="@{/user/profile}" method="post" class="tAc" enctype="multipart/form-data">
                 <fieldset>
                     <legend>프로필 수정 양식</legend>
                     <h2 tabindex="0">프로필 수정</h2>
                     <div class="user-wrap01">
                         <div class="user-style">
                             <div class="user-img">
-                                <img id="main-profile-img" th:src="@{/imgs/profile-imgs/00.png}">
+                                <img id="main-profile-img" name="profileImg" src="/imgs/profile-imgs/00.png">
                             </div>
                         </div>
                     </div>
                     <button type="button" id="img-edit" class="img-edit">프로필 이미지 변경</button>
                     <div class="profile-wrap02">
-                        <label for="name-change">이름변경</label>
-                        <input id="name-change" type="text" class="input-style01 dark-theme" value="">
+                        <label for="w_nickname">이름변경</label>
+                        <input id="w_nickname" type="text" name="w_nickname"
+                               class="input-style01 dark-theme">
                     </div>
                     <ul id="profile-wrap01" class="profile-wrap01">
                         <li class="profile-style">
@@ -130,7 +131,7 @@
                             <a th:href="@{/}">취소</a>
                         </div>
                         <div class="btn-purple btn-purple-dark" th:name="btn_purple">
-                            <a th:href="@{/}">확인</a>
+                            <input type="submit" value="확인">
                         </div>
                     </ul>
                 </fieldset>

@@ -8,7 +8,6 @@ public interface UserMapper {
     int insUser(UserEntity entity);
     UserEntity selUser(UserEntity entity);
     UserEntity idChk(UserEntity entity);
-
     int upNickname(UserEntity entity);
 
 
