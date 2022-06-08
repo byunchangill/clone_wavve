@@ -37,17 +37,7 @@ public class UserService {
     }
 
     //닉네임, 이미지 변경
-    public int upNickname(UserEntity entity) {
-/*        UserEntity loginUser = auth.getLoginUser();
-        entity.setIuser(loginUser.getIuser());
-
-        int result = userMapper.upNickname(entity);
-        if (result == 1) {
-            System.out.println("nickname : " + entity.getW_nickname());
-            loginUser.setW_nickname(entity.getW_nickname());
-        }
-        return result;*/
-
+/*    public int upNickname(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());
 
         auth.getLoginUser().setW_nickname(entity.getW_nickname());
@@ -56,6 +46,22 @@ public class UserService {
         if (result == 1) {
             System.out.println("nickname : " + entity.getW_nickname());
             entity.setW_nickname(entity.getW_nickname());
+        }
+        return result;
+    }*/
+
+    public int upUser(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+
+        auth.getLoginUser().setW_nickname(entity.getW_nickname());
+        auth.getLoginUser().setProfileImg(entity.getProfileImg());
+
+        int result = userMapper.upUser(entity);
+        if (result == 1) {
+            System.out.println("nickname : " + entity.getW_nickname());
+            System.out.println("profileImg : " + entity.getProfileImg());
+            entity.setW_nickname(entity.getW_nickname());
+            entity.setProfileImg(entity.getProfileImg());
         }
         return result;
     }

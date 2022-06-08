@@ -18,7 +18,7 @@
     document.getElementById('profile-wrap01').style.visibility = "hidden"; // hide
     document.getElementById('profile-wrap01').style.display = 'none'; // hide
 
-// 이미지 변경
+    // 이미지 변경
     profileImgChangeButton.addEventListener('click', e => {
         document.getElementById('img-edit').style.visibility = "hidden"; // hide
         document.getElementById('img-edit').style.display = 'none'; // hide
@@ -32,29 +32,30 @@
         });
     });
 
-// 닉네임 변경
-
+    // 닉네임 변경
     const changeNickname = document.querySelector('#w_nickname');
 
     if (nickname == null) {
-        changeNickname.value += "프로필1";
+        changeNickname.value = "프로필1";
     } else {
-        changeNickname.value += `${nickname}`;
+        changeNickname.value = `${nickname}`;
     }
 
     if (profileFormElem) {
         profileFormElem.addEventListener('submit', e => {
             e.preventDefault();
             let nickname = profileFormElem.w_nickname.value;
+            let profile = profileFormElem.profileImg.src;
 
             fetch(`/user/profile`, {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({w_nickname: nickname})
+                body: JSON.stringify({w_nickname: nickname, profileImg:profile})
             }).then(res => res.json())
                 .then(data => {
                     if (data === 1) {
-                        location.href = "/";
+                        // location.href = "/";
+                        location.href = "/user/profile";
                     }
                 }).catch(e => {
                 console.log(e);

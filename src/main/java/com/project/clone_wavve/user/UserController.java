@@ -54,9 +54,15 @@ public class UserController {
     public void profile() {
     }
 
-    @ResponseBody
+/*    @ResponseBody
     @PostMapping("/profile")
     public int profileProc(@RequestBody UserEntity entity) {
        return userService.upNickname(entity);
+    }*/
+
+    @ResponseBody
+    @PostMapping("/profile")
+    public int profileProc(@RequestBody UserEntity entity) {
+        return userService.upUser(entity);
     }
 }

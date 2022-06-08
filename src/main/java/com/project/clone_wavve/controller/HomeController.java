@@ -1,24 +1,13 @@
 package com.project.clone_wavve.controller;
 
-import com.project.clone_wavve.config.CustomUserDetailsService;
-import com.project.clone_wavve.config.model.CustomUserPrincipal;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-/*    @GetMapping
-    public String index() {
-        return "/index";
-    }*/
 
     @GetMapping("/")
-    public String index(@AuthenticationPrincipal CustomUserPrincipal userPrincipal, Model model){
-        if(userPrincipal != null) {
-            model.addAttribute(userPrincipal.getUser());
-        }
-        return "index";
+    public String index(){
+        return "/index";
     }
 }

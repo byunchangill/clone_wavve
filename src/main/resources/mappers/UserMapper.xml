@@ -24,4 +24,16 @@
         SET w_nickname = #{w_nickname}
         WHERE iuser = ${iuser}
     </update>
+
+    <update id="upUser">
+        UPDATE w_user
+        SET
+        <if test=" w_nickname != null and w_nickname != '' ">
+            w_nickname = #{w_nickname}
+        </if>,
+        <if test=" profileImg != null and profileImg != '' ">
+            profileImg = #{profileImg}
+        </if>
+        WHERE iuser = ${iuser}
+    </update>
 </mapper>

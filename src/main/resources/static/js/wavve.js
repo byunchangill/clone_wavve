@@ -409,3 +409,18 @@ console.log(iuser);
 console.log(wid);
 console.log(nickname);
 console.log(profileImg);
+
+// 닉네임
+const mainNickname = document.querySelector('#mainNickname');
+if (nickname == null) {
+    mainNickname.innerHTML = '프로필1';
+} else {
+    mainNickname.innerHTML = `${nickname}`;
+}
+
+const subNickname = document.querySelector('.name');
+if (nickname == null) {
+    subNickname.innerHTML = "프로필1";
+} else {
+    subNickname.innerHTML = `${nickname}`;
+}
