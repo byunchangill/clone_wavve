@@ -12,7 +12,7 @@
 <body>
 <div id="app" class="" >
     <div id="localConst" th:with="auth=${#authentication.getPrincipal().getUser()}"
-         th:attr="data-iuser=${auth.iuser}, data-profileImg=${auth.profileImg},
+         th:attr="data-iuser=${auth.iuser}, data-profileimg=${auth.profileImg},
                                    data-w_nickname=${auth.w_nickname},
                                    data-provider=${auth.provider}, data-w_id=${auth.w_id},
                                    data-rdt=${auth.rdt}">
@@ -34,7 +34,7 @@
                     <div class="user-wrap01">
                         <div class="user-style">
                             <div class="user-img">
-                                <img id="main-profile-img" th:name="profileImg" th:src="@{/imgs/profile-imgs/00.png}">
+                                <img id="main-profile-img" name="profileImg" >
                             </div>
                         </div>
                     </div>

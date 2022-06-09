@@ -24,7 +24,7 @@
 <th:block th:fragment="header">
     <span id="localConst" sec:authorize="isAuthenticated()"
           th:with="auth=${#authentication.getPrincipal().getUser}"
-          th:attr="data-iuser=${auth.iuser}, data-profileImg=${auth.profileImg},
+          th:attr="data-iuser=${auth.iuser}, data-profileimg=${auth.profileImg},
                        data-w_nickname=${auth.w_nickname},
                        data-provider=${auth.provider}, data-w_id=${auth.w_id},
                        data-rdt=${auth.rdt}"></span>
@@ -45,7 +45,7 @@
                         <button type="button" class="arrow" id="mainNickname"></button>
                         <div class="header-over-1depth">
                             <div class="profile-image-area">
-                                <img src="https://img.wavve.com/service30/profile/0.png" alt="파란 파도">
+                                <img src="/imgs/profile-imgs/00.png">
                             </div>
                             <span class="name"></span>
                             <a href="/user/profile" class="change">프로필 편집</a>

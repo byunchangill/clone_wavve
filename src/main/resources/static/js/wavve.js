@@ -403,7 +403,7 @@ const localhostElem = document.querySelector('#localConst');
 const iuser = localhostElem.dataset.iuser;
 const wid = localhostElem.dataset.w_id;
 const nickname = localhostElem.dataset.w_nickname;
-const profileImg = localhostElem.dataset.profileImg;
+const profileImg = localhostElem.dataset.profileimg;
 
 console.log(iuser);
 console.log(wid);
@@ -423,4 +423,12 @@ if (nickname == null) {
     subNickname.innerHTML = "프로필1";
 } else {
     subNickname.innerHTML = `${nickname}`;
+}
+
+// 프로필 이미지 변경
+const profileImageArea = document.querySelector('.profile-image-area img');
+if (profileImg != null) {
+    profileImageArea.src = `${profileImg}`;
+} else {
+    profileImageArea.src = '/imgs/profile-imgs/00.png';
 }
