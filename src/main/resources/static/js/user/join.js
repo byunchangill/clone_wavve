@@ -1,12 +1,13 @@
 {
     // email 형식 정규식
     const idRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    //대소문자+숫자+특수문자 조합으로 8글자이상 20글자 이하
+    //비밀번호 정규식
     const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
     const joinFrmElem = document.querySelector('#myJoinFrm');
 
     // 회원가입 아이디 정규화 예외 처리
-    joinFrmElem.w_id.addEventListener('keyup', (e) => {
+    // change 변동이 있을 때 발생
+    joinFrmElem.w_id.addEventListener('change', (e) => {
         const idVal = joinFrmElem.w_id.value;
         const id_box = document.querySelector('#w_id');
         const id_error = document.querySelector('#id-error-alert');
@@ -28,24 +29,41 @@
             id_error.className = "login-error-gray"
             id_box.className = "input-style01"
         }
+    });
+
+    joinFrmElem.addEventListener('submit', e => {
+        const idVal = joinFrmElem.w_id.value;
+        const pwVal = joinFrmElem.w_pw.value;
+
+        if (!idRegex.test(idVal) || !pwRegex.test(pwVal)) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         fetch(`/user/idChk/${idVal}`)
             .then(res => res.json())
             .then((data) => {
-                setIdChkMsg(data);
+                if (data === 0) {
+                    setIdChkMsg(data);
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             }).catch((e) => {
             console.log(e);
         });
     });
 
-    joinFrmElem.addEventListener('submit', e => {
-        const idVal = joinFrmElem.w_id.value;
-        if (!idRegex.test(idVal)) {
-            e.preventDefault();
+    // 아이디 중복 확인 메시지
+    const setIdChkMsg = (data) => {
+
+        switch (data.result) {
+            case 0:
+                alert('이미 사용중인 아이디 입니다.');
+                break;
         }
-    });
+    };
 
     // 회원가입 비밀번호 정규화 예외 처리
-    joinFrmElem.w_pw.addEventListener('keyup', (e) => {
+    joinFrmElem.w_pw.addEventListener('change', (e) => {
         const pwVal = joinFrmElem.w_pw.value;
         const pw_box = document.querySelector('#w_pw');
         const pw_error = document.querySelector('#pw-error-alert');
@@ -61,14 +79,10 @@
         }
     });
 
-    joinFrmElem.addEventListener('submit', e => {
-        const pwVal = joinFrmElem.w_pw.value;
-        if (!pwRegex.test(pwVal)) {
-            e.preventDefault();
-        }
-    });
 
     // 비밀번호 보기
+    const pw_box = document.querySelector('#w_pw');
+
     function onPwShow(elem) {
         let type;
         let text;

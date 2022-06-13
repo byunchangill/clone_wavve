@@ -1,12 +1,10 @@
 package com.project.clone_wavve.user;
 
 import com.project.clone_wavve.common.MyConst;
-import com.project.clone_wavve.config.model.CustomUserPrincipal;
 import com.project.clone_wavve.user.model.UserEntity;
+import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,19 +48,31 @@ public class UserController {
         res.put("result", userService.idChk(w_id));
         return res;
     }
+
+    //profile 변경
     @GetMapping("/profile")
     public void profile() {
     }
-
-/*    @ResponseBody
-    @PostMapping("/profile")
-    public int profileProc(@RequestBody UserEntity entity) {
-       return userService.upNickname(entity);
-    }*/
-
     @ResponseBody
     @PostMapping("/profile")
     public int profileProc(@RequestBody UserEntity entity) {
         return userService.upUser(entity);
     }
+
+    // 비밀번호 체크
+    @GetMapping("/me")
+    public void me() {
+
+    }
+
+    @PostMapping("/me")
+    @ResponseBody
+    public Map<String, Integer> meProc(@RequestBody UserVo vo) {
+        Map<String, Integer> res = new HashMap();
+        res.put("wpw", userService.pwChk(vo));
+        return res;
+    }
+
+    @GetMapping("/change")
+    public void change() {}
 }

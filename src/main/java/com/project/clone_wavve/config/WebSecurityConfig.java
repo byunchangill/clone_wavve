@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests() // 인증 시작
-                .antMatchers("/user/profile").authenticated() //로그인 안됐을때 못들어가게
+                .antMatchers("/user/profile", "/user/userchange").authenticated() //로그인 안됐을때 못들어가게
                 .anyRequest().permitAll()//나머지는 다 통과
                 .and()
                     .formLogin()

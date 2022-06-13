@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <link rel="stylesheet" th:href="@{/css/user/me.css}">
+    <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
+    <script defer th:src="@{/js/user/me.js}"></script>
+    <title>wavve(웨이브)-회원정보수정</title>
+</head>
+<body>
+<div class="header">
+    <div class="header-gnb">
+        <h1 class="logo">
+            <a th:href="@{/}">
+                <img id="header-logo" src="/imgs/main-img/logo.png" alt="wavve">
+            </a>
+        </h1>
+    </div>
+</div>
+
+<form th:action="@{/user/me}" id="myFrm" method="post" name="myFrm" enctype="multipart/form-data">
+    <div class="mywavve-info-body" id="g-contents">
+        <div class="wrap">
+            <div class="ch-my-pw">
+                <p class="mywavve-info-text01">
+                    회원님의 회원정보를 안전하게 보호하기 위해<br>비밀번호를 한번 더 확인해주세요.
+                </p>
+                <input type="password" placeholder="비밀번호를 입력해 주세요"
+                       name="password" id="user-pw" required>
+                <input type="submit" value="확인" class="ch-pw-btn">
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

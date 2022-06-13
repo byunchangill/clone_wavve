@@ -3,7 +3,9 @@ package com.project.clone_wavve.user;
 import com.project.clone_wavve.config.AuthenticationFacade;
 import com.project.clone_wavve.config.ProviderType;
 import com.project.clone_wavve.user.model.UserEntity;
+import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,20 +38,17 @@ public class UserService {
         return result == null ? 1 : 0;
     }
 
-    //닉네임, 이미지 변경
-/*    public int upNickname(UserEntity entity) {
-        entity.setIuser(auth.getLoginUserPk());
-
-        auth.getLoginUser().setW_nickname(entity.getW_nickname());
-
-        int result = userMapper.upNickname(entity);
-        if (result == 1) {
-            System.out.println("nickname : " + entity.getW_nickname());
-            entity.setW_nickname(entity.getW_nickname());
+    // 비밀번호 체크
+    public int pwChk(UserVo vo) {
+        vo.setIuser(auth.getLoginUserPk());
+        UserEntity entity = userMapper.pwChk(vo);
+        if (!BCrypt.checkpw(vo.getCurrentwpw(), entity.getW_pw())) {
+            return 0; //현재 비밀번호 다름
         }
-        return result;
-    }*/
+        return 1;
+    }
 
+    // 프로필이미지, 닉네임 변경
     public int upUser(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());
 
@@ -58,8 +57,6 @@ public class UserService {
 
         int result = userMapper.upUser(entity);
         if (result == 1) {
-            System.out.println("nickname : " + entity.getW_nickname());
-            System.out.println("profileImg : " + entity.getProfileImg());
             entity.setW_nickname(entity.getW_nickname());
             entity.setProfileImg(entity.getProfileImg());
         }

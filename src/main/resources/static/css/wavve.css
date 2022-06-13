@@ -111,23 +111,6 @@ body {
     color: #a5a5a5;
 }
 
-/*.header-nav .header-over-1depth {*/
-/*    position: absolute;*/
-/*    top: 30px;*/
-/*    right: -44px;*/
-/*    width: 158px;*/
-/*    background-color: #101010;*/
-/*    text-align: center;*/
-/*    visibility: visible;*/
-/*    opacity: 1;*/
-/*    -webkit-transform: translateY(-0.5em);*/
-/*    transform: translateY(-0.5em);*/
-/*    z-index: 1100;*/
-/*    -webkit-transition: all .3s ease-in-out 0s,visibility 0s linear .3s,z-index 0s linear .01s;*/
-/*    transition: all .3s ease-in-out 0s,visibility 0s linear .3s,z-index 0s linear .01s;*/
-/*    font-size: 0;*/
-/*}*/
-
 .header-over-1depth{
     position: absolute;
     top: 30px;

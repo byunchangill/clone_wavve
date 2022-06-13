@@ -17,24 +17,26 @@
         const pwVal = loginElem.w_pw.value;
 
         if (!idRegex.test(idVal) || !pwRegex.test(pwVal)) {
+            e.preventDefault();
+
             // 로그인 에러 테그 보이기
             document.getElementById('login-error').style.visibility = "visible"; // show
             document.getElementById('login-error').style.display = ''; // show
-            e.preventDefault();
+        } else {
+            //유효성 검사가 통과되면 서버로 전송.
+            document.myLoginFrm.submit();
         }
 
         // 아이디 저장을 체크 하였을때
         if (document.myLoginFrm.id_save.checked === true) {
             //쿠키이름을 id로 아이디입력필드값을 7일동안 저장
             setCookie("id", document.myLoginFrm.w_id.value, 7);
+
             // 아이디 저장을 체크 하지 않았을때
         } else {
             //날짜를 0으로 저장하여 쿠키삭제
             setCookie("id", document.myLoginFrm.w_id.value, 0);
         }
-
-        //유효성 검사가 통과되면 서버로 전송.
-        document.myLoginFrm.submit();
     });
 
     window.onload = function () {
@@ -50,7 +52,7 @@
 
     //쿠키 저장함수
     function setCookie(name, value, expiredays) {
-        var todayDate = new Date();
+        let todayDate = new Date();
         todayDate.setDate(todayDate.getDate() + expiredays);
         document.cookie = name + "=" + escape(value) + "; path=/; expires="
             + todayDate.toGMTString() + ";"

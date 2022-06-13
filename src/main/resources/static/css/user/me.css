@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    min-height: 100%;
+    background-color: #1b1b1b;
+}
+
+.mywavve-info-body {
+    padding: 40px 0;
+}
+
+.wrap {
+    width: 1240px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ch-my-pw {
+    width: 410px;
+    margin: 110px auto;
+    text-align: center;
+}
+
+.ch-my-pw .mywavve-info-text01 {
+    margin-bottom: 40px;
+}
+
+.mywavve-info-text01 {
+    font-size: 20px;
+    line-height: 1.45em;
+    color: #bcbdbe;
+}
+
+.ch-my-pw input[type="password"] {
+    font-size: 16px;
+    color: #a5a5a5;
+    border-radius: 6px;
+    background-color: #2f2f2f;
+    border: none;
+    width: 300px;
+    height: 54px;
+    padding-left: 20px;
+    outline: none;
+}
+
+.ch-pw-btn {
+    margin-left: 10px;
+    padding: 0 30px;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 23px;
+    background-color: #1351f9;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    border: none;
+}

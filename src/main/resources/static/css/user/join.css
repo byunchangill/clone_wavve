@@ -170,13 +170,13 @@ label {
 
 .login-error-gray {
     color: #a5a5a5;
-    background: url(/imgs/item-icon/icon-gray.png) no-repeat left 2px;
+    /*background: url(/imgs/item-icon/icon-gray.png) no-repeat left 2px;*/
 
 }
 
 .login-error-pink {
     color: #ff27a3;
-    background: url(/imgs/item-icon/ico-error-pink.png) no-repeat left 2px;
+    /*background: url(/imgs/item-icon/ico-error-pink.png) no-repeat left 2px;*/
 }
 
 .login-error-gray, .login-error-red, .login-error-red, .login-error-purple, .login-error-pink {

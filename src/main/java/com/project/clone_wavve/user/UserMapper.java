@@ -8,6 +8,6 @@ public interface UserMapper {
     int insUser(UserEntity entity); // 회원가입
     UserEntity selUser(UserEntity entity); // 조회
     UserEntity idChk(UserEntity entity); // 아이디 체크
-    int upNickname(UserEntity entity); // 닉네임 변경
+    UserEntity pwChk(UserEntity entity); // 비밀번호 체크
     int upUser(UserEntity entity); // 닉네임, 이미지 변경
 }
