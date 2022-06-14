@@ -1,4 +1,5 @@
 {
+    let idChkState = 1; //0: 아이디 사용 불가능, 1:아이디 사용가능
     // email 형식 정규식
     const idRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     //비밀번호 정규식
@@ -35,32 +36,23 @@
         const idVal = joinFrmElem.w_id.value;
         const pwVal = joinFrmElem.w_pw.value;
 
-        if (!idRegex.test(idVal) || !pwRegex.test(pwVal)) {
+        if (!idRegex.test(idVal)) {
             e.preventDefault();
-            e.stopPropagation();
+        }else if (!pwRegex.test(pwVal)) {
+            e.preventDefault();
         }
         fetch(`/user/idChk/${idVal}`)
             .then(res => res.json())
             .then((data) => {
-                if (data === 0) {
-                    setIdChkMsg(data);
-                    e.preventDefault();
-                    e.stopPropagation();
+                if (data.result !== 1) {
+                    alert('이미 사용중인 아이디 입니다.');
+                    location.href = "/user/join";
                 }
+                console.log(data);
             }).catch((e) => {
             console.log(e);
         });
     });
-
-    // 아이디 중복 확인 메시지
-    const setIdChkMsg = (data) => {
-
-        switch (data.result) {
-            case 0:
-                alert('이미 사용중인 아이디 입니다.');
-                break;
-        }
-    };
 
     // 회원가입 비밀번호 정규화 예외 처리
     joinFrmElem.w_pw.addEventListener('change', (e) => {
@@ -72,6 +64,8 @@
             pw_error.innerHTML = "비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.연속된 숫자 또는 4자 이상의 동일 문자는 비밀번호로 사용할 수 없습니다."
             pw_error.className = "login-error-pink"
             pw_box.className = "input-style01 input-style02 error-msg"
+            e.preventDefault();
+            e.stopPropagation();
         } else {
             pw_error.innerHTML = "비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요."
             pw_error.className = "login-error-gray"
@@ -79,22 +73,21 @@
         }
     });
 
-
     // 비밀번호 보기
     const pw_box = document.querySelector('#w_pw');
+    const btnInput = document.querySelector('.btn-input');
 
-    function onPwShow(elem) {
-        let type;
-        let text;
-
-        if (pw_box.type === 'password') {
-            type = 'text';
-            text = 'hide';
-        } else {
-            type = 'password';
-            text = 'show';
-        }
-        pw_box.type = type;
-        elem.innerHTML = text;
+    if(btnInput) {
+        btnInput.addEventListener('click', function(e) {
+            if(pw_box.type === 'password') {
+                pw_box.type = 'text';
+                btnInput.innerHTML = 'hide';
+                e.preventDefault();
+            } else {
+                pw_box.type = 'password';
+                btnInput.innerHTML = 'show';
+                e.preventDefault();
+            }
+        });
     }
 }
