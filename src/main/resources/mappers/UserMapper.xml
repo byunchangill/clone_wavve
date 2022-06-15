@@ -19,12 +19,6 @@
         WHERE w_id = #{w_id}
     </select>
 
-    <select id="pwChk" resultType="UserEntity">
-        SELECT *
-        FROM w_user
-        WHERE w_pw = #{w_pw}
-    </select>
-
     <update id="upNickname">
         UPDATE w_user
         SET w_nickname = #{w_nickname}

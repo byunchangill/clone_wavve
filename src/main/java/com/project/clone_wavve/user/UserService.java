@@ -38,16 +38,6 @@ public class UserService {
         return result == null ? 1 : 0;
     }
 
-    // 비밀번호 체크
-    public int pwChk(UserVo vo) {
-        vo.setIuser(auth.getLoginUserPk());
-        UserEntity entity = userMapper.pwChk(vo);
-        if (!BCrypt.checkpw(vo.getCurrentwpw(), entity.getW_pw())) {
-            return 0; //현재 비밀번호 다름
-        }
-        return 1;
-    }
-
     // 프로필이미지, 닉네임 변경
     public int upUser(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());

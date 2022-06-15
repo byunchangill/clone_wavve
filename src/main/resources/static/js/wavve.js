@@ -1,19 +1,23 @@
 // 메뉴
-$(".menu>li").eq(1).stop().mouseover(function(){
-    $(".submenu").stop().css("display","block")
+const menuElem = document.querySelector('.menu > li:nth-child(2)');
+const submenuElem = document.querySelector('.submenu');
+menuElem.addEventListener('mouseover', e => {
+    submenuElem.style.display = "block";
 });
 
-$(".menu>li").eq(1).stop().mouseleave(function(){
-    $(".submenu").stop().css("display","none")
+menuElem.addEventListener('mouseleave', e => {
+    submenuElem.style.display = "none";
 });
 
-// 포로필
-$(".nav > li").eq(0).stop().mouseover(function(){
-    $(".header-over-1depth").stop().css("display","block")
+// 프로필
+const navElem = document.querySelector('.nav > li:nth-child(1)');
+const headerOver1depth = document.querySelector('.header-over-1depth');
+navElem.addEventListener('mouseover', e => {
+   headerOver1depth.style.display = "block";
 });
 
-$(".nav > li").eq(0).stop().mouseleave(function(){
-    $(".header-over-1depth").stop().css("display","none")
+navElem.addEventListener('mouseleave', e => {
+    headerOver1depth.style.display = "none";
 });
 
 //이미지슬라이
@@ -194,11 +198,15 @@ function dot_slide(){
 }
 
 //모달
-$("#search").click(function(){
-    $("#modal").fadeIn();
-    $(".modal_out").click(function(){
-        $("#modal").fadeOut();
-    })
+const searchElem = document.querySelector('#search');
+const modalElem = document.querySelector('#modal');
+
+searchElem.addEventListener('click', e => {
+    modalElem.style.display = 'block';
+});
+const modalOutElem = document.querySelector('.modal_out');
+modalOutElem.addEventListener('click', e => {
+   modalElem.style.display = 'none';
 });
 
 $(".list_menu>li").click(function(){
@@ -234,34 +242,23 @@ $(".modal2_bt>li").eq(0).click(function(){
     $(".content_day>li").css("background-color","#333")
 })
 
-//팝업쿠키
-$(document).ready(function(){
-    if($.cookie("nopop")=="Y"){
-        $("#popup").css("display","none")
-    }else{
-        $("#popup").show();
-    }
-})
-
-$(".popclose").click(function(){
-    if(document.frmPopup.popcheck.checked){
-        $.cookie("nopop","Y",{expires:7});
-    }
-    $("#popup").hide();
-})
-
 //위로 올라가기
-$(window).scroll(function(){
-    if($(this).scrollTop()>0){
-        $(".up").show()
-    }else{
-        $(".up").hide()
-    }
-})
+const upElem = document.querySelector('.up');
+upElem.addEventListener('click', e => {
+    window.scrollTo({
+        top : 0,
+        behavior: 'smooth'
+    });
+});
 
-$(".up").click(function(){
-    $("body,html").animate({scrollTop:0},100)
-})
+// 스크롤 Y축 0 이상이면 아이콘 표시하기
+window.addEventListener('scroll', e => {
+    if (window.scrollY > 0) {
+        upElem.style.display = "block";
+    } else {
+        upElem.style.display = "none";
+    }
+});
 
 //공지사항 슬라이드
 notice();

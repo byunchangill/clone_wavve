@@ -1,9 +1,12 @@
 package com.project.clone_wavve.user;
 
 import com.project.clone_wavve.common.MyConst;
+import com.project.clone_wavve.config.model.CustomUserPrincipal;
 import com.project.clone_wavve.user.model.UserEntity;
 import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private final MyConst myConst;
+    private final PasswordEncoder encoder;
 
     @GetMapping("/login")
     public void login() {
@@ -66,11 +69,16 @@ public class UserController {
     }
 
     @PostMapping("/me")
-    @ResponseBody
-    public Map<String, Integer> meProc(@RequestBody UserVo vo) {
-        Map<String, Integer> res = new HashMap();
-        res.put("wpw", userService.pwChk(vo));
-        return res;
+    public String me(Authentication auth, @RequestParam String w_pw) {
+        CustomUserPrincipal user = (CustomUserPrincipal) auth.getPrincipal();
+        String userPw = user.getUser().getW_pw();
+        if (encoder.matches(w_pw, userPw)) {
+            // 비밀번호 일치시
+            return "redirect:/user/change";
+        } else {
+            // 비밀번호 틀릴시
+            return "redirect:/user/me";
+        }
     }
 
     @GetMapping("/change")
