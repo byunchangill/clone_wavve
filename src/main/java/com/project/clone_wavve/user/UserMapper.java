@@ -9,4 +9,6 @@ public interface UserMapper {
     UserEntity selUser(UserEntity entity); // 조회
     UserEntity idChk(UserEntity entity); // 아이디 체크
     int upUser(UserEntity entity); // 닉네임, 이미지 변경
+    int changeUser(UserEntity entity); // 이름, 생일, 성별, 폰번호 변경
+
 }

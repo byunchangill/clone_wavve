@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<form th:action="@{/user/me}" id="myFrm" method="post" name="myFrm" enctype="multipart/form-data">
+<form th:action="@{/user/me}" id="myFrm" method="post" name="myFrm">
     <div class="mywavve-info-body" id="g-contents">
         <div class="wrap">
             <div class="ch-my-pw">
@@ -34,5 +34,14 @@
         </div>
     </div>
 </form>
+<script th:inline="javascript">
+
+    let result ="${msg}";
+
+    if(result === 'error'){
+        alert("비밀번호 인증오류입니다. 다시 입력해 주세요.");
+    }
+
+</script>
 </body>
 </html>

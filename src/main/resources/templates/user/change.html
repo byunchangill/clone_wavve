@@ -1,10 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <link rel="stylesheet" th:href="@{/css/user/change.css}">
+    <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
+    <script defer th:src="@{/js/user/change.js}"></script>
+    <title>wavve(웨이브)-회원정보 수정</title>
 </head>
 <body>
-    <h1>회원정보 수정</h1>
+<div id="localConst" th:with="auth=${#authentication.getPrincipal().getUser()}"
+     th:attr="data-iuser=${auth.iuser}, data-w_id=${auth.w_id}, data-w_nm=${auth.w_nm},
+     data-w_birthday=${auth.w_birthday}, data-w_gender=${auth.w_gender}, data-w_phone=${auth.w_phone}">
+<div class="header">
+    <div class="header-gnb">
+        <h1 class="logo">
+            <a th:href="@{/}">
+                <img id="header-logo" src="/imgs/main-img/logo.png" alt="wavve">
+            </a>
+        </h1>
+    </div>
+</div>
+
+<div class="go-top">
+    <img src="/imgs/item-icon/btn-go-top.png">
+</div>
+
+<div class="member">
+    <div class="edit-wrap" id="g-contents">
+        <span class="txt-modify-top">본인 인증을 하시면 다양한 혜택을 받으실 수 있어요!</span>
+        <a href="#" class="txt-edit">본인인증하기</a>
+    </div>
+
+    <form action="/user/change" id="myMainFrm" method="post" name="myMainFrm">
+        <div class="common-box">
+            <table class="edit-form">
+                <tbody>
+                <tr class="edit-form-id">
+                    <th>이메일(아이디)</th>
+                    <td>
+                        <span class="txt-modify-name"><!--이메일(아이디) 값--></span>
+                        <a href="#" class="txt-edit">이메일(아이디) 변경하기</a>
+                    </td>
+                </tr>
+                <tr class="edit-form-link">
+                    <th>비밀번호</th>
+                    <td>
+                        <a href="#" class="txt-edit">비밀번호 변경하기</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <label for="w_nm">
+                            <input type="text" placeholder="이름을 입력해 주세요." class="input-style01" id="w_nm"
+                                   name="w_nm" maxlength="30" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">성별</th>
+                    <td class="selection">
+                        <div class="join-gender">
+                            <div class="gender-man">
+                                <input type="radio" id="user-male" name="w_gender" value="M">
+                                <label class="gender-txt" for="user-male">남자</label>
+                            </div>
+                            <div class="gender-woman">
+                                <input type="radio" id="user-female" name="w_gender" value="F">
+                                <label class="gender-txt" for="user-female">여자</label>
+                            </div>
+                        </div>
+                        <div class="txt-exclamation">
+                            <p>성별은 설정 후 변경이 불가능합니다. (선택)</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>생년월일</th>
+                    <td>
+                        <label for="w_birthday">
+                            <input type="text" placeholder="8자리 숫자 입력 예)19800101 (선택)" class="input-style01"
+                                   id="w_birthday" name="w_birthday" maxlength="8">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>휴대폰 번호</th>
+                    <td>
+                        <label for="w_phone">
+                            <input type="text" placeholder="휴대폰 번호를 입력해 주세요.(선택)"
+                                   class="input-style01 isPhoneEvent isPhone" id="w_phone" name="w_phone"
+                                   maxlength="13">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일 주소</th>
+                    <td id="email"><!--이메일 값--></td>
+                </tr>
+
+                <tr>
+                    <th>SKT 혜택 인증</th>
+                    <td>
+                        <a href="#" class="txt-edit">SKT 부가서비스 혜택 인증하기</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>빠른결제 카드관리</th>
+                    <td>
+                        <a href="#" class="txt-edit">빠른결제 카드관리</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="certify-myself-box">
+                <div class="a11y-hidden">
+                    <strong>수신동의</strong>
+                </div>
+                <div class="certify-agree-list">
+                    <ul>
+                        <li>
+                            <div class="check-style">
+                                <input type="checkbox" id="user-mail" class="check-purple" name="isRecvEmail" value="Y">
+                                <label for="user-mail">이메일 수신동의(선택)</label>
+                            </div>
+                            <a href="#" class="certify-agree-btn" target="_blank">
+                                <span class="a11y-hidden">약관 더보기</span>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="check-style">
+                                <input type="checkbox" id="user-sms" class="check-purple" name="isRecvSms" value="Y">
+                                <label for="user-sms">SMS 수신동의(선택)</label>
+                            </div>
+                            <a href="#" class="certify-agree-btn" target="_blank">
+                                <span class="a11y-hidden">약관 더보기</span>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="check-style">
+                                <input type="checkbox" id="user-target" class="check-purple" name="isRecvTargetService">
+                                <label for="user-target">맞춤형 서비스 제공을 위한 제3자 제공 동의(선택)</label>
+                            </div>
+                            <a href="#" class="certify-agree-btn" target="_blank">
+                                <span class="a11y-hidden">약관 더보기</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="btn-box-multiple">
+                <li>
+                    <div class="btn-purple-line">
+                        <a href="/">취소</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="btn-purple">
+                        <input type="submit" value="수정">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+
+<div class="edit-leave-wrap">
+    <a href="#"
+       class="edit-leave-txt">회원탈퇴</a>
+</div>
+</div>
 </body>
 </html>

@@ -3,9 +3,7 @@ package com.project.clone_wavve.user;
 import com.project.clone_wavve.config.AuthenticationFacade;
 import com.project.clone_wavve.config.ProviderType;
 import com.project.clone_wavve.user.model.UserEntity;
-import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +47,27 @@ public class UserService {
         if (result == 1) {
             entity.setW_nickname(entity.getW_nickname());
             entity.setProfileImg(entity.getProfileImg());
+        }
+        return result;
+    }
+
+    // 프로필이미지, 닉네임 변경
+    public int changeUser(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+
+        auth.getLoginUser().setW_nm(entity.getW_nm());
+        auth.getLoginUser().setW_birthday(entity.getW_birthday());
+        auth.getLoginUser().setW_gender(entity.getW_gender());
+        auth.getLoginUser().setW_phone(entity.getW_phone());
+        auth.getLoginUser().setW_gender(entity.getW_gender());
+
+        int result = userMapper.changeUser(entity);
+        if (result == 1) {
+            entity.setW_nm(entity.getW_nm());
+            entity.setW_birthday(entity.getW_birthday());
+            entity.setW_gender(entity.getW_gender());
+            entity.setW_phone(entity.getW_phone());
+            entity.setW_gender(entity.getW_gender());
         }
         return result;
     }

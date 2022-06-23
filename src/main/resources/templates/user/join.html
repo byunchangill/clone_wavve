@@ -30,32 +30,31 @@
                 <span>wavve를 즐길 수</span> 있어요!
             </h2>
             <form th:action="@{/user/join}" id="myJoinFrm" method="post" name="myJoinFrm">
-
-                    <legend>간편 회원가입 입력 폼</legend>
-                    <ul class="join-input-box">
-                        <li>
-                            <label for="w_id">
-                                <input type="text" name="w_id" id="w_id" placeholder="wavve@example.com"
-                                       class="input-style01 input-style02" maxlength="50" required>
-                            </label>
-                            <p class="login-error-gray" id="id-error-alert">
-                                로그인, 비밀번호 찾기, 알림에 사용되니 정확한 이메일을 입력해 주세요.
-                            </p>
-                        </li>
-                        <li>
-                            <label for="w_pw">
-                                <input type="password" name="w_pw" id="w_pw" placeholder="wavve 비밀번호 설정"
-                                       class="input-style01 input-style02" maxlength="20" required>
-                            </label>
-                            <button class="btn-input">show</button>
-                            <p class="login-error-gray" id="pw-error-alert">
-                                비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.
-                            </p>
-                        </li>
-                    </ul>
-                    <ul class="btn-wavve-join" id="sub-join-submit">
-                        <li><input class="join-input" type="submit" value="wavve 회원가입"></li>
-                    </ul>
+                <legend>간편 회원가입 입력 폼</legend>
+                <ul class="join-input-box">
+                    <li>
+                        <label for="w_id">
+                            <input type="text" name="w_id" id="w_id" placeholder="wavve@example.com"
+                                   class="input-style01 input-style02" maxlength="50" required>
+                        </label>
+                        <p class="login-error-gray" id="id-error-alert">
+                            로그인, 비밀번호 찾기, 알림에 사용되니 정확한 이메일을 입력해 주세요.
+                        </p>
+                    </li>
+                    <li>
+                        <label for="w_pw">
+                            <input type="password" name="w_pw" id="w_pw" placeholder="wavve 비밀번호 설정"
+                                   class="input-style01 input-style02" maxlength="20" required>
+                        </label>
+                        <button class="btn-input">show</button>
+                        <p class="login-error-gray" id="pw-error-alert">
+                            비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.
+                        </p>
+                    </li>
+                </ul>
+                <ul class="btn-wavve-join" id="sub-join-submit">
+                    <li><input class="join-input" type="submit" value="wavve 회원가입"></li>
+                </ul>
 
             </form>
 
@@ -89,8 +88,10 @@
                         </a>
                     </li>
                     <li>
-                        <a  href="javascript:;" onclick="loginWithGoogle();">
-                            <img class="google-img" src="https://w7.pngwing.com/pngs/869/485/png-transparent-google-logo-computer-icons-google-text-logo-google-logo-thumbnail.png" alt="구글로 로그인">
+                        <a href="javascript:;" onclick="loginWithGoogle();">
+                            <img class="google-img"
+                                 src="https://w7.pngwing.com/pngs/869/485/png-transparent-google-logo-computer-icons-google-text-logo-google-logo-thumbnail.png"
+                                 alt="구글로 로그인">
                         </a>
                     </li>
                 </ul>

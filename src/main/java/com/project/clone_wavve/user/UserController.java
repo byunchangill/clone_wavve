@@ -1,9 +1,7 @@
 package com.project.clone_wavve.user;
 
-import com.project.clone_wavve.common.MyConst;
 import com.project.clone_wavve.config.model.CustomUserPrincipal;
 import com.project.clone_wavve.user.model.UserEntity;
-import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +20,7 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder encoder;
 
+    // 유저 로그인
     @GetMapping("/login")
     public void login() {
     }
@@ -32,6 +31,7 @@ public class UserController {
         return "redirect:/user/login";
     }
 
+    // 유저 회원가입
     @GetMapping("/join")
     public void join() {
     }
@@ -52,7 +52,7 @@ public class UserController {
         return res;
     }
 
-    //profile 변경
+    //유저 프로필이미지, 닉네임 변경
     @GetMapping("/profile")
     public void profile() {
     }
@@ -67,20 +67,27 @@ public class UserController {
     public void me() {
 
     }
-
     @PostMapping("/me")
-    public String me(Authentication auth, @RequestParam String w_pw) {
+    public String me(Authentication auth, @RequestParam String w_pw, RedirectAttributes rttr) {
         CustomUserPrincipal user = (CustomUserPrincipal) auth.getPrincipal();
-        String userPw = user.getUser().getW_pw();
-        if (encoder.matches(w_pw, userPw)) {
-            // 비밀번호 일치시
-            return "redirect:/user/change";
-        } else {
+        String userPw = user.getPassword();
+        if (!encoder.matches(w_pw, userPw)) {
             // 비밀번호 틀릴시
+            //TODO
+            rttr.addFlashAttribute("msg", "error");
             return "redirect:/user/me";
         }
+        // 비밀번호 일치시
+        return "redirect:/user/change";
     }
 
+    // 유저 이름, 생일, 성별, 폰번호 변경
     @GetMapping("/change")
     public void change() {}
+
+    @ResponseBody
+    @PostMapping("/change")
+    public int changeProc(@RequestBody UserEntity entity) {
+        return userService.changeUser(entity);
+    }
 }

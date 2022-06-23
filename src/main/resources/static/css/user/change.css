@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+body, html {
+    height: 100%;
+    background-color: #1b1b1b;
+    box-sizing: border-box;
+}
+
+td, th, img, abbr, acronym, img, fieldset, iframe {
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.member {
+    width: 100%;
+    z-index: 10;
+    margin-top: 108px;
+    overflow: hidden;
+}
+
+.go-top {
+    position: fixed;
+    right: 16px;
+    bottom: 5px;
+    z-index: 1;
+    display: none;
+    cursor: pointer;
+}
+
+.go-top img {
+    width: 72px;
+    height: 71px;
+    float: right;
+    margin: 0 3px 3px 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.edit-wrap {
+    margin: 40px 0 -40px;
+    text-align: center;
+}
+
+.txt-modify-top {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #666;
+}
+
+.txt-edit {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    background: url(/imgs/item-icon/ico-arrow-gray-right.png) no-repeat right center;
+    padding: 5px 15px 5px 0;
+}
+
+.common-box {
+    padding: 40px 40px;
+    width: 560px;
+    position: relative;
+    margin: 80px auto;
+    background: #252525;
+}
+
+.edit-form {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.edit-form tr.edit-form-id {
+    align-items: flex-start;
+}
+
+.edit-form tr {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.edit-form th {
+    width: 140px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.edit-form th, .edit-form td {
+    vertical-align: top;
+    color: #a5a5a5;
+    line-height: 24px;
+}
+
+.edit-form td {
+    flex: 1;
+    font-size: 16px;
+}
+
+.txt-modify-name {
+    display: block;
+    display: -webkit-box;
+    margin-bottom: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.common-box .join-gender {
+    width: 100%;
+    overflow: hidden;
+}
+
+.common-box .gender-man, .common-box .gender-woman {
+    width: calc(50% - 6px);
+    font-size: 25px;
+    color: #a5a5a5;
+    display: inline-block;
+    text-align: center;
+    line-height: 54px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #5e5e5e;
+}
+
+.gender-man input[type="radio"], .gender-woman input[type="radio"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.common-box .gender-txt {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.edit-form label {
+    font-size: 14px;
+}
+
+label {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.common-box .gender-man label:before {
+    background: url(/imgs/item-icon/icon-gender-man-b.png) no-repeat center;
+}
+
+.common-box .gender-woman label:before {
+    background: url(/imgs/item-icon/icon-gender-woman-b.png) no-repeat center;
+}
+
+.common-box .gender-man label:before, .common-box .gender-woman label:before {
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 22px;
+    content: '';
+    padding-right: 4px;
+}
+
+.a11y-hidden {
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+}
+
+.certify-agree-list li:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.certify-agree-list li {
+    position: relative;
+    padding: 24px 16px;
+    background-color: #2f2f2f;
+}
+
+.check-style input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+}
+
+.check-style input[type="checkbox"] + label {
+    position: relative;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #a5a5a5;
+}
+
+label {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.certify-agree-btn {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    background: url(/imgs/item-icon/ico-arrow-gray-right.png) no-repeat right 3px center/9px 17px;
+}
+
+ul.btn-box-multiple {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 40px;
+}
+
+ul.btn-box-multiple li:first-child {
+    margin-right: 8px;
+}
+
+ul.btn-box-multiple li {
+    width: calc(50% - 4px);
+    float: left;
+}
+
+.btn-purple-line {
+    text-align: center;
+}
+
+.btn-purple-line > a {
+    display: block;
+    border-radius: 30px;
+    height: 58px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    background-color: #525252;
+}
+
+.btn-purple {
+    text-align: center;
+}
+
+.btn-purple > input {
+    background: #1351f9;
+    border-radius: 30px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    padding: 0 119px;
+    border: none;
+}
+
+.edit-leave-wrap {
+    width: 560px;
+    text-align: right;
+    margin: -70px auto 80px;
+}
+
+.edit-leave-txt {
+    font-size: 16px;
+    color: #a5a5a5;
+    display: inline-block;
+    background: url(/imgs/item-icon/ico-arrow-gray-right.png) no-repeat right top 10px;
+    padding: 5px 15px 5px 0;
+}
+
+.member-layout input[type="checkbox"].check-purple + label:before, .withdraw-info-bg input[type="checkbox"].check-purple + label:before {
+    border: 1px solid #a5a5a5;
+    background-color: transparent;
+}
+
+.check-style input[type="checkbox"].check-purple + label:before {
+    background: #252525;
+    border: 1px solid #a5a5a5;
+    vertical-align: middle;
+}
+
+.check-style input[type="checkbox"] + label:before {
+    content: ' ';
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    margin-right: 10px;
+}
+
+.check-style input[type="checkbox"].check-purple:checked + label:before {
+    background: url(/imgs/item-icon/check-purple.png) #1351f9 no-repeat center;
+    background-size: 23px;
+    border: 1px solid #1351f9;
+}
+
+.join-gender .gender-man.on, .join-gender .gender-woman.on {
+    background-color: #1351f9;
+    color: #fff;
+}
+
+.gender-man.on label:before {
+    background: url(/imgs/item-icon/icon-gender-man-w.png) no-repeat center;
+}
+
+.gender-woman.on label:before {
+    background: url(/imgs/item-icon/icon-gender-woman-w.png) no-repeat center;
+}
+
+.gender-man label:before, .gender-woman label:before {
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 22px;
+    content: '';
+    padding-right: 4px;
+}

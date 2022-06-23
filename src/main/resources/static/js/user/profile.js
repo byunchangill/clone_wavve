@@ -40,7 +40,6 @@
 
     // 닉네임 변경
     const changeNickname = document.querySelector('#w_nickname');
-
     if (nickname == null) {
         changeNickname.value = "프로필1";
     } else {

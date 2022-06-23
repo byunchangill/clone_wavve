@@ -28,15 +28,22 @@
     <update id="upUser">
         UPDATE w_user
         SET
-        <if test=" w_pw != null and w_pw != '' ">
-            w_pw = #{w_pw}
-        </if>,
         <if test=" w_nickname != null and w_nickname != '' ">
             w_nickname = #{w_nickname}
         </if>,
         <if test=" profileImg != null and profileImg != '' ">
             profileImg = #{profileImg}
         </if>
+        WHERE iuser = ${iuser}
+    </update>
+
+    <update id="changeUser">
+        UPDATE w_user
+        SET
+        w_nm = #{w_nm},
+        w_birthday = #{w_birthday},
+        w_phone = #{w_phone},
+        w_gender = #{w_gender}
         WHERE iuser = ${iuser}
     </update>
 </mapper>

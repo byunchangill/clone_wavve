@@ -12,11 +12,11 @@ menuElem.addEventListener('mouseleave', e => {
 // 프로필
 const navElem = document.querySelector('.nav > li:nth-child(1)');
 const headerOver1depth = document.querySelector('.header-over-1depth');
-navElem.addEventListener('mouseover', e => {
+navElem?.addEventListener('mouseover', e => {
    headerOver1depth.style.display = "block";
 });
 
-navElem.addEventListener('mouseleave', e => {
+navElem?.addEventListener('mouseleave', e => {
     headerOver1depth.style.display = "none";
 });
 
@@ -205,7 +205,7 @@ searchElem.addEventListener('click', e => {
     modalElem.style.display = 'block';
 });
 const modalOutElem = document.querySelector('.modal_out');
-modalOutElem.addEventListener('click', e => {
+modalOutElem?.addEventListener('click', e => {
    modalElem.style.display = 'none';
 });
 
@@ -244,7 +244,7 @@ $(".modal2_bt>li").eq(0).click(function(){
 
 //위로 올라가기
 const upElem = document.querySelector('.up');
-upElem.addEventListener('click', e => {
+upElem?.addEventListener('click', e => {
     window.scrollTo({
         top : 0,
         behavior: 'smooth'
