@@ -33,7 +33,47 @@
         <a href="#" class="txt-edit">본인인증하기</a>
     </div>
 
-    <form action="/user/change" id="myMainFrm" method="post" name="myMainFrm">
+    <from action="/user/change" id="myPwFrm" name="myPwFrm" method="post">
+        <div id="popup-user-password" class="popup-back">
+            <div class="popup member-pop-wrap">
+                <div class="popup-button-close">
+                    <a id="fadeOut">
+                        <img src="/imgs/item-icon/btn-popup-close.png" alt="btn-close">
+                    </a>
+                </div>
+                <div class="pop-contents tAc">
+                    <h1>비밀번호 변경</h1>
+                    <p class="pw-txt">변경할 비밀번호를 입력해주세요.</p>
+                    <ul class="join-wrap02">
+                        <li>
+                            <b>아이디</b>
+                            <b></b>
+                        </li>
+                    </ul>
+                    <div class="find-wrap02">
+                        <label class="dsn" for="user-newpw">새 비밀번호를 입력해 주세요.</label>
+                        <input type="password" placeholder="새 비밀번호를 입력해 주세요."
+                               class="input-style01 input-style03" maxlength="20"
+                               name="w_pw" id="user-newpw" required>
+                        <i class="password-line">라인</i>
+                        <label class="dsn" for="user-repw">새 비밀번호를 한 번 더 입력해 주세요.</label>
+                        <input type="password" placeholder="새 비밀번호를 한 번 더 입력해 주세요."
+                               class="input-style01 input-style04" maxlength="20"
+                               name="w_pwChk" id="user-repw" required>
+                    </div>
+                    <div class="txt-exclamation1">
+                        <p>8~20자, 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.</p>
+                    </div>
+                    <div class="btn-purple">
+                        <input type="submit" value="확인">
+<!--                        <a href="javascript:;" onclick="onSubmitUserPassword();">확인</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </from>
+
+    <form action="/user/change/password" id="myMainFrm" method="post" name="myMainFrm">
         <div class="common-box">
             <table class="edit-form">
                 <tbody>
@@ -46,7 +86,7 @@
                 </tr>
                 <tr class="edit-form-link">
                     <th>비밀번호</th>
-                    <td>
+                    <td class="password-show">
                         <a href="#" class="txt-edit">비밀번호 변경하기</a>
                     </td>
                 </tr>

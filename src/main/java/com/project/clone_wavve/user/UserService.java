@@ -3,7 +3,10 @@ package com.project.clone_wavve.user;
 import com.project.clone_wavve.config.AuthenticationFacade;
 import com.project.clone_wavve.config.ProviderType;
 import com.project.clone_wavve.user.model.UserEntity;
+import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +63,7 @@ public class UserService {
         auth.getLoginUser().setW_gender(entity.getW_gender());
         auth.getLoginUser().setW_phone(entity.getW_phone());
         auth.getLoginUser().setW_gender(entity.getW_gender());
+        auth.getLoginUser().setW_pw(entity.getW_pw());
 
         int result = userMapper.changeUser(entity);
         if (result == 1) {
@@ -68,7 +72,52 @@ public class UserService {
             entity.setW_gender(entity.getW_gender());
             entity.setW_phone(entity.getW_phone());
             entity.setW_gender(entity.getW_gender());
+            entity.setW_pw(entity.getW_pw());
         }
         return result;
     }
+
+    public int changePw(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+/*        UserEntity entity = userMapper.changeUserSelect(vo);
+        if (!BCrypt.checkpw(vo.getCurrentWpw(), entity.getW_pw())) {
+            return 2; // 현재 비밀번호 다름.
+        }*/
+        String hashedPw = BCrypt.hashpw(entity.getW_pw(), BCrypt.gensalt());
+        entity.setW_pw(hashedPw);
+        return userMapper.changePw(entity);
+    }
+
+/*    public int changePw(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+        UserEntity user = userMapper.changeUserSelect(entity);
+
+        String hashedWpw = passwordEncoder.encode(entity.getW_pw());
+        user.setW_pw(hashedWpw);
+        user.setProvider(ProviderType.LOCAL.toString());
+        try {
+            return userMapper.changePw(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }*/
+
+/*    public int changePw(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+
+        String hashedPw = BCrypt.hashpw(entity.getW_pw(), BCrypt.gensalt());
+        entity.setW_pw(hashedPw);
+        return userMapper.changePw(entity);
+
+        String hashedWpw = passwordEncoder.encode(entity.getW_pw());
+        entity.setW_pw(hashedWpw);
+        entity.setProvider(ProviderType.LOCAL.toString());
+        try {
+            return userMapper.changePw(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }*/
 }

@@ -68,13 +68,13 @@ public class UserController {
 
     }
     @PostMapping("/me")
-    public String me(Authentication auth, @RequestParam String w_pw, RedirectAttributes rttr) {
+    public String me(Authentication auth, @RequestParam String w_pw, RedirectAttributes rAttr) {
         CustomUserPrincipal user = (CustomUserPrincipal) auth.getPrincipal();
         String userPw = user.getPassword();
         if (!encoder.matches(w_pw, userPw)) {
             // 비밀번호 틀릴시
             //TODO
-            rttr.addFlashAttribute("msg", "error");
+            rAttr.addFlashAttribute("msg", "error");
             return "redirect:/user/me";
         }
         // 비밀번호 일치시
@@ -89,5 +89,14 @@ public class UserController {
     @PostMapping("/change")
     public int changeProc(@RequestBody UserEntity entity) {
         return userService.changeUser(entity);
+    }
+
+    @PostMapping("/change/password")
+    public String password(@RequestBody UserEntity entity) {
+        int result = userService.changePw(entity);
+        if (result != 1) {
+            return "redirect:/user/change/password";
+        }
+        return "redirect:/user/change";
     }
 }

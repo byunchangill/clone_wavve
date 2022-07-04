@@ -46,4 +46,20 @@
         w_gender = #{w_gender}
         WHERE iuser = ${iuser}
     </update>
+
+    <select id="changeUserSelect" resultType="UserEntity">
+        SELECT * FROM w_user
+        WHERE
+        <if test=" w_id != null and w_id != '' and provider != null and provider != ''">
+            w_id = #{w_id} and provider = ${provider}
+        </if>
+        <if test=" iuser > 0 "> iuser = #{iuser}</if>
+    </select>
+
+    <update id="changePw">
+        UPDATE w_user
+        SET
+        w_pw = #{w_pw}
+        WHERE iuser = ${iuser}
+    </update>
 </mapper>

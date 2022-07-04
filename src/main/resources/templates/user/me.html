@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/user/join.css}">
     <link rel="stylesheet" th:href="@{/css/user/me.css}">
     <link rel="shortcut icon" th:href="@{/imgs/wavve-icon/ms-icon-310x310.png}">
-    <script defer th:src="@{/js/user/me.js}"></script>
+    <script th:src="@{/js/user/me.js}" defer></script>
     <title>wavve(웨이브)-회원정보수정</title>
 </head>
 <body>
@@ -34,14 +34,5 @@
         </div>
     </div>
 </form>
-<script th:inline="javascript">
-
-    let result ="${msg}";
-
-    if(result === 'error'){
-        alert("비밀번호 인증오류입니다. 다시 입력해 주세요.");
-    }
-
-</script>
 </body>
 </html>

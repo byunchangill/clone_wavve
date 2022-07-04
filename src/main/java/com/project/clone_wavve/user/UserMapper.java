@@ -5,10 +5,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    int insUser(UserEntity entity); // 회원가입
-    UserEntity selUser(UserEntity entity); // 조회
-    UserEntity idChk(UserEntity entity); // 아이디 체크
-    int upUser(UserEntity entity); // 닉네임, 이미지 변경
-    int changeUser(UserEntity entity); // 이름, 생일, 성별, 폰번호 변경
-
+    int insUser(UserEntity entity); // 회원가입.
+    UserEntity selUser(UserEntity entity); // 조회.
+    UserEntity idChk(UserEntity entity); // 아이디 체크.
+    int upUser(UserEntity entity); // 닉네임, 이미지 변경.
+    int changeUser(UserEntity entity); // 이름, 생일, 성별, 폰번호 변경.
+    UserEntity changeUserSelect(UserEntity entity);   // 유저 정보 셀렉트
+    int changePw(UserEntity entity); // 비밀번호 변경.
 }
