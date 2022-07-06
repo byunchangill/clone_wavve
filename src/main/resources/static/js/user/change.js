@@ -99,6 +99,7 @@
     }
 
     const myFrmElem = document.querySelector('#myMainFrm');
+
     if (myFrmElem) {
         myFrmElem.addEventListener('submit', event => {
             event.preventDefault();
@@ -129,11 +130,11 @@
     const popupPassword = document.querySelector('#popup-user-password');
     const popup = document.querySelector('.password-show');
     popup.addEventListener('click', e => {
-        let newpw = document.getElementById('user-newpw');
-        let repw = document.getElementById('user-repw');
+        const newPasswordVal = document.getElementById('w_pw');
+        const rePasswordVal = document.getElementById('w_pwChk');
 
-        newpw.value = '';
-        repw.value = '';
+        newPasswordVal.value = '';
+        rePasswordVal.value = '';
 
         popupPassword.style.display = 'block';
     });
@@ -149,28 +150,40 @@
         joinWrap02.innerText = `${wid}`;
     }
 
+    const myPwFrm = document.getElementById('myPwFrm');
     // 팝업창 비밀번호 정규화
-    const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
-    const myPwFrmElem = document.querySelector('#myPwFrm');
+    function onSubmitUserPassword() {
+        const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+        const newPasswordVal = document.getElementById('w_pw').value;
+        const rePasswordVal = document.getElementById('w_pwChk').value;
 
-    if (myPwFrmElem) {
-        myPwFrmElem.addEventListener('submit', function (e) {
-            const newPasswordVal = document.querySelector('#user-newpw');
-            const rePasswordVal = document.querySelector('#user-repw');
-
-            if (newPasswordVal.length === 0) {
-                alert('새 비밀번호를 입력해 주세요.');
-                e.preventDefault();
-            } else if (rePasswordVal.length === 0) {
-                alert('새 비밀번호 확인을 입력해 주세요.');
-                e.preventDefault();
-            } else if (newPasswordVal !== rePasswordVal) {
-                alert('새 비밀번호와 확인 번호가 맞지 않습니다. 다시 입력해 주세요.');
-                e.preventDefault();
-            } else if (!pwRegex.text(newPasswordVal) || !pwRegex.text(rePasswordVal)) {
-                alert('비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.연속된 숫자 또는 4자 이상의 동일 문자는 비밀번호로 사용할 수 없습니다.');
-                e.preventDefault();
-            }
+        if (newPasswordVal?.length === 0) {
+            alert('새 비밀번호를 입력해 주세요.');
+            return false;
+        } else if (rePasswordVal?.length === 0) {
+            alert('새 비밀번호 확인을 입력해 주세요.');
+            return false;
+        } else if (newPasswordVal !== rePasswordVal) {
+            alert('새 비밀번호와 확인 번호가 맞지 않습니다. 다시 입력해 주세요.');
+            return false;
+        } else if (!pwRegex.test(newPasswordVal) || !pwRegex.test(rePasswordVal)) {
+            alert('비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.연속된 숫자 또는 4자 이상의 동일 문자는 비밀번호로 사용할 수 없습니다.');
+            return false;
+        }
+        fetch(`/user/change/password`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(
+                {w_pw : newPasswordVal}
+            )
+        }).then(res => res.json())
+            .then(data => {
+                if (data === 1) {
+                    alert('비밀번호가 변경되었습니다.');
+                    location.href = '/user/change';
+                }
+            }).catch(e => {
+            console.log(e);
         });
     }
 }

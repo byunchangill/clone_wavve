@@ -459,7 +459,8 @@ ul.join-wrap02 li {
     text-align: center;
 }
 
-.btn-purple > input {
+.btn-purple > a {
+    display: block;
     background: #1351f9;
     border-radius: 30px;
     height: 60px;
@@ -467,7 +468,4 @@ ul.join-wrap02 li {
     font-size: 18px;
     color: #fff;
     text-align: center;
-    padding: 0 120px;
-    border: none;
-    cursor: pointer;
 }

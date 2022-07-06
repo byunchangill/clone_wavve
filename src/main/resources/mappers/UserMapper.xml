@@ -47,19 +47,27 @@
         WHERE iuser = ${iuser}
     </update>
 
-    <select id="changeUserSelect" resultType="UserEntity">
+<!--    <select id="changeUserSelect" resultType="UserEntity">
         SELECT * FROM w_user
         WHERE
         <if test=" w_id != null and w_id != '' and provider != null and provider != ''">
             w_id = #{w_id} and provider = ${provider}
-        </if>
+        </if>,
         <if test=" iuser > 0 "> iuser = #{iuser}</if>
+    </select>-->
+
+    <select id="changeUserSelect" resultType="UserEntity">
+        SELECT * FROM w_user
+        WHERE w_id = #{w_id}
+        and iuser = #{iuser}
     </select>
 
     <update id="changePw">
         UPDATE w_user
         SET
-        w_pw = #{w_pw}
+        <if test=" w_pw != null and w_pw != '' ">
+            w_pw = #{w_pw}
+        </if>
         WHERE iuser = ${iuser}
     </update>
 </mapper>

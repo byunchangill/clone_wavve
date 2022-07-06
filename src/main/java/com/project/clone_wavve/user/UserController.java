@@ -2,6 +2,7 @@ package com.project.clone_wavve.user;
 
 import com.project.clone_wavve.config.model.CustomUserPrincipal;
 import com.project.clone_wavve.user.model.UserEntity;
+import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,12 +93,9 @@ public class UserController {
         return userService.changeUser(entity);
     }
 
+    @ResponseBody
     @PostMapping("/change/password")
-    public String password(@RequestBody UserEntity entity) {
-        int result = userService.changePw(entity);
-        if (result != 1) {
-            return "redirect:/user/change/password";
-        }
-        return "redirect:/user/change";
+    public int password(@RequestBody UserEntity entity) {
+        return userService.changePw(entity);
     }
 }
