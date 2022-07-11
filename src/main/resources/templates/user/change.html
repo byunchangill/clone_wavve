@@ -13,6 +13,7 @@
 <div id="localConst" th:with="auth=${#authentication.getPrincipal().getUser()}"
      th:attr="data-iuser=${auth.iuser}, data-w_id=${auth.w_id}, data-w_nm=${auth.w_nm},
      data-w_birthday=${auth.w_birthday}, data-w_gender=${auth.w_gender}, data-w_phone=${auth.w_phone}">
+</div>
 <div class="header">
     <div class="header-gnb">
         <h1 class="logo">
@@ -33,11 +34,53 @@
         <a href="#" class="txt-edit">본인인증하기</a>
     </div>
 
+    <!--  e_mail 인증  -->
+    <from action="/user/change/email" id="myEmailFrm" method="post" name="myEmailFrm">
+        <div id="popup-user-email" class="popup-back" style="display: block">
+            <div class="popup member-pop-wrap">
+                <div class="popup-button-close">
+                    <a class="email-popup-close">
+                        <img src="/imgs/item-icon/btn-popup-close.png" alt="btn-close">
+                    </a>
+                </div>
+
+                <div class="common-box-email">
+                    <h2 class="modify-hd">이메일(아이디) 변경</h2>
+                    <p class="modify-txt">
+                        변경할 이메일(아이디)를 입력해 주세요.
+                    </p>
+                    <ul class="join-input-box">
+                        <li>
+                            <label for="w_id">
+                                <input type="text" id="w_id" name="address" placeholder="wavve@example.com" maxlength="50" class="input-style01 input-with-code" required>
+                            </label>
+                            <button type="button" class="btn-input btn-input-code" id="btn-authcode">인증코드 전송</button>
+                            <p class="login-error-gray" id="id-error-alert">로그인, 비밀번호 찾기, 알림에 사용되니 정확한 이메일을 입력해 주세요.</p>
+                        </li>
+                        <li>
+                            <label for="ch-AuthCode">
+                                <input type="number" id="ch-AuthCode" name="authCode" placeholder="이메일로 전송된 인증코드를 입력해주세요." class="input-style01 input-style02" disabled="">
+                                <span class="time-limit" id="time-limit" style="display: none;">00:00</span>
+                            </label>
+                            <p id="code-error-alert" class="login-error-gray"></p>
+                        </li>
+                    </ul>
+                    <div class="btn-box">
+                        <div class="btn-purple">
+                            <a href="javascript:;" onclick="onSubmitUserId();">확인</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </from>
+
+    <!--  비밀번호 변경  -->
     <from action="/user/change/password" id="myPwFrm" name="myPwFrm" method="post">
         <div id="popup-user-password" class="popup-back">
             <div class="popup member-pop-wrap">
                 <div class="popup-button-close">
-                    <a id="fadeOut">
+                    <a class="fadeOut">
                         <img src="/imgs/item-icon/btn-popup-close.png" alt="btn-close">
                     </a>
                 </div>
@@ -72,6 +115,7 @@
         </div>
     </from>
 
+    <!--  이름, 성별, 폰번호, 생일 추가정보 입력  -->
     <form action="/" id="myMainFrm" method="post" name="myMainFrm">
         <div class="common-box">
             <table class="edit-form">
@@ -80,7 +124,7 @@
                     <th>이메일(아이디)</th>
                     <td>
                         <span class="txt-modify-name"><!--이메일(아이디) 값--></span>
-                        <a href="#" class="txt-edit">이메일(아이디) 변경하기</a>
+                        <a href="javascript:;" onclick="onUserEmail();" class="txt-edit">이메일(아이디) 변경하기</a>
                     </td>
                 </tr>
                 <tr class="edit-form-link">
@@ -163,7 +207,8 @@
                     <ul>
                         <li>
                             <div class="check-style">
-                                <input type="checkbox" id="user-mail" class="check-purple" name="isRecvEmail" value="Y">
+                                <input type="checkbox" id="user-mail" class="check-purple" name="isRecvEmail"
+                                       value="Y">
                                 <label for="user-mail">이메일 수신동의(선택)</label>
                             </div>
                             <a href="#" class="certify-agree-btn" target="_blank">
@@ -172,7 +217,8 @@
                         </li>
                         <li>
                             <div class="check-style">
-                                <input type="checkbox" id="user-sms" class="check-purple" name="isRecvSms" value="Y">
+                                <input type="checkbox" id="user-sms" class="check-purple" name="isRecvSms"
+                                       value="Y">
                                 <label for="user-sms">SMS 수신동의(선택)</label>
                             </div>
                             <a href="#" class="certify-agree-btn" target="_blank">
@@ -181,7 +227,8 @@
                         </li>
                         <li>
                             <div class="check-style">
-                                <input type="checkbox" id="user-target" class="check-purple" name="isRecvTargetService">
+                                <input type="checkbox" id="user-target" class="check-purple"
+                                       name="isRecvTargetService">
                                 <label for="user-target">맞춤형 서비스 제공을 위한 제3자 제공 동의(선택)</label>
                             </div>
                             <a href="#" class="certify-agree-btn" target="_blank">

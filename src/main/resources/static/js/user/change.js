@@ -1,4 +1,6 @@
 {
+    let emailState = 2;
+
     let userElem = document.querySelector('#localConst');
     let iuser = userElem.dataset.iuser;
     let wid = userElem.dataset.w_id;
@@ -126,7 +128,84 @@
         });
     }
 
-    // 팝업창
+    // e-mail 변경 팝업창
+    const popupEmail = document.querySelector('#popup-user-email');
+    function onUserEmail () {
+        popupEmail.style.display = 'block';
+    }
+    const emailPopupClose = document.querySelector('.email-popup-close');
+    emailPopupClose.addEventListener('click', e => {
+        popupEmail.style.display = 'none';
+    });
+
+    // Random Code 생성
+    function createCode(objArr, iLength) {
+        let arr = objArr;
+        let randomStr = "";
+
+        for (let j=0; j<iLength; j++) {
+            randomStr += arr[Math.floor(Math.random()*arr.length)];
+        }
+
+        return randomStr
+    }
+
+    // 숫자
+    function getRandomCode(iLength) {
+        let arr="0,1,2,3,4,5,6,7,8,9".split(",");
+
+        let rnd = createCode(arr, iLength);
+        return rnd;
+    }
+
+    const setEmailMsg = (data) => {
+        emailState = data.email;
+
+        switch (data.email) {
+            case 0:
+                alert('이미 사용중인 이메일');
+                break;
+            case 1:
+                alert('인증 메일 발송');
+                const randomCode = getRandomCode(6);
+                const emailVal = myFrmElem.w_id.value;
+                fetch(`/user/mail`, {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify( {
+                        w_id : emailVal,
+                        title : "이메일 인증",
+                        message : "인증번호 : " + randomCode
+                    })
+                })
+                    .then(res => res.json())
+                    .then((data) => {
+                        console.log(data);
+                    }).catch(e => {
+                    console.log(e);
+                });
+                break;
+        }
+    }
+
+    const emailButton = document.querySelector('#btn-authcode');
+    emailButton.addEventListener('click', e => {
+        const emailVal = myFrmElem.querySelector('#address');
+
+        fetch(`/user/emailChk`, {
+            'method': 'post',
+            'headers': {'Content-Type': 'application/json'},
+            'body': JSON.stringify({address : emailVal})
+        })
+            .then(res => res.json())
+            .then((data) => {
+                setEmailMsg(data);
+            }).catch((e) => {
+            console.log(e);
+        });
+    })
+
+    // 비밀번호 변경 팝업창
     const popupPassword = document.querySelector('#popup-user-password');
     const popup = document.querySelector('.password-show');
     popup.addEventListener('click', e => {
@@ -139,7 +218,7 @@
         popupPassword.style.display = 'block';
     });
 
-    const popupOut = document.querySelector('#fadeOut');
+    const popupOut = document.querySelector('.fadeOut');
     popupOut.addEventListener('click', e => {
         popupPassword.style.display = 'none';
     });
@@ -150,7 +229,6 @@
         joinWrap02.innerText = `${wid}`;
     }
 
-    const myPwFrm = document.getElementById('myPwFrm');
     // 팝업창 비밀번호 정규화
     function onSubmitUserPassword() {
         const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;

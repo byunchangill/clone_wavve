@@ -2,8 +2,11 @@ package com.project.clone_wavve.user;
 
 import com.project.clone_wavve.config.AuthenticationFacade;
 import com.project.clone_wavve.config.ProviderType;
+import com.project.clone_wavve.user.model.EmailDto;
 import com.project.clone_wavve.user.model.UserEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,15 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationFacade auth;
+
+    private final JavaMailSender javaMailSender;
+
+    public void mailSend(EmailDto emailDto){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject(emailDto.getTitle());
+        message.setText(emailDto.getMessage());
+        javaMailSender.send(message);
+    }
 
     public int join(UserEntity entity) {
         // 비밀번호 암호화
@@ -33,6 +45,12 @@ public class UserService {
         userEntity.setW_id(w_id);
 
         UserEntity result = userMapper.idChk(userEntity);
+        return result == null ? 1 : 0;
+    }
+
+    // 이메일 중복 확인
+    public int emailChk(UserEntity entity) {
+        UserEntity result = userMapper.idChk(entity);
         return result == null ? 1 : 0;
     }
 

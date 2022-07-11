@@ -1,6 +1,7 @@
 package com.project.clone_wavve.user;
 
 import com.project.clone_wavve.config.model.CustomUserPrincipal;
+import com.project.clone_wavve.user.model.EmailDto;
 import com.project.clone_wavve.user.model.UserEntity;
 import com.project.clone_wavve.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
@@ -45,12 +46,20 @@ public class UserController {
         return "redirect:login";
     }
 
-    // id 중복 체크(회원가입)
+    // id 중복 체크
     @GetMapping("/idChk/{w_id}")
     @ResponseBody
     public Map<String, Integer> idChk(@PathVariable String w_id) {
         Map<String, Integer> res = new HashMap();
         res.put("result", userService.idChk(w_id));
+        return res;
+    }
+
+    @PostMapping("/emailChk")
+    @ResponseBody
+    public Map<String, Integer> emailChkProc(@RequestBody UserEntity entity) {
+        Map<String, Integer> res = new HashMap();
+        res.put("email", userService.emailChk(entity));
         return res;
     }
 
@@ -97,5 +106,15 @@ public class UserController {
     @PostMapping("/change/password")
     public int password(@RequestBody UserEntity entity) {
         return userService.changePw(entity);
+    }
+
+    // 이미엘 인증
+    @GetMapping("/mail")
+    public void email(){}
+
+    @PostMapping("/mail")
+    @ResponseBody
+    public void emailProc(@RequestBody EmailDto emailDto) {
+        userService.mailSend(emailDto);
     }
 }

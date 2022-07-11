@@ -72,7 +72,7 @@ img {
 }
 
 .common-box {
-    padding: 40px 40px;
+    padding: 40px 60px;
     width: 560px;
     position: relative;
     margin: 80px auto;
@@ -344,7 +344,7 @@ ul.btn-box-multiple li {
 .popup-back .popup {
     position: absolute;
     z-index: 2200;
-    left: 50%;
+    left: 48%;
     top: 50%;
     border-radius: 8px;
 }
@@ -459,6 +459,19 @@ ul.join-wrap02 li {
     text-align: center;
 }
 
+.btn-purple > input {
+    background: #1351f9;
+    border-radius: 30px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    padding: 0 120px;
+    border: none;
+    cursor: pointer;
+}
+
 .btn-purple > a {
     display: block;
     background: #1351f9;
@@ -469,3 +482,67 @@ ul.join-wrap02 li {
     color: #fff;
     text-align: center;
 }
+
+.common-box-email {
+    padding: 40px 40px;
+}
+
+.modify-hd {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    color: #fff;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.modify-txt {
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+    color: #a5a5a5;
+}
+
+.join-input-box {
+    overflow: hidden;
+}
+
+.join-input-box li {
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.join-input-box label {
+    font-size: 16px;
+    color: #a5a5a5;
+    margin: 0 0 16px;
+    display: block;
+    font-weight: 700;
+}
+
+.btn-input-code, .time-limit {
+    color: #3887ff;
+}
+
+.login-error-gray {
+    color: #a5a5a5;
+    background: url(/imgs/item-icon/icon-gray.png) no-repeat left 2px;
+}
+
+.login-error-purple {
+    color: #3887ff;
+    background: url(/imgs/item-icon/ico-error-purple.png) no-repeat left 2px;
+}
+
+/*
+.btn-input, .time-limit {
+    position: absolute;
+    right: 16px;
+    top: 5px;
+    padding: 10px 4px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+}*/
