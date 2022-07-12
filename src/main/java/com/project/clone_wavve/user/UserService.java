@@ -21,9 +21,12 @@ public class UserService {
 
     public void mailSend(EmailDto emailDto){
         SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(emailDto.getAddress());
         message.setSubject(emailDto.getTitle());
         message.setText(emailDto.getMessage());
         javaMailSender.send(message);
+
+        System.out.println(emailDto.getMessage());
     }
 
     public int join(UserEntity entity) {
@@ -45,12 +48,6 @@ public class UserService {
         userEntity.setW_id(w_id);
 
         UserEntity result = userMapper.idChk(userEntity);
-        return result == null ? 1 : 0;
-    }
-
-    // 이메일 중복 확인
-    public int emailChk(UserEntity entity) {
-        UserEntity result = userMapper.idChk(entity);
         return result == null ? 1 : 0;
     }
 
@@ -78,7 +75,6 @@ public class UserService {
         auth.getLoginUser().setW_gender(entity.getW_gender());
         auth.getLoginUser().setW_phone(entity.getW_phone());
         auth.getLoginUser().setW_gender(entity.getW_gender());
-        auth.getLoginUser().setW_pw(entity.getW_pw());
 
         int result = userMapper.changeUser(entity);
         if (result == 1) {
@@ -87,7 +83,6 @@ public class UserService {
             entity.setW_gender(entity.getW_gender());
             entity.setW_phone(entity.getW_phone());
             entity.setW_gender(entity.getW_gender());
-            entity.setW_pw(entity.getW_pw());
         }
         return result;
     }
@@ -99,5 +94,17 @@ public class UserService {
         entity.setW_pw(hashedWpw);
 
         return userMapper.changePw(entity);
+    }
+
+    public int changeEmail(UserEntity entity) {
+        entity.setIuser(auth.getLoginUserPk());
+        auth.getLoginUser().setW_id(entity.getW_id());
+
+        int result = userMapper.changeEmail(entity);
+
+        if (result == 1) {
+            entity.setW_id(entity.getW_id());
+        }
+        return result;
     }
 }

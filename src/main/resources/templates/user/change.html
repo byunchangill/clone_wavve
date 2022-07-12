@@ -36,7 +36,7 @@
 
     <!--  e_mail 인증  -->
     <from action="/user/change/email" id="myEmailFrm" method="post" name="myEmailFrm">
-        <div id="popup-user-email" class="popup-back" style="display: block">
+        <div id="popup-user-email" class="popup-back">
             <div class="popup member-pop-wrap">
                 <div class="popup-button-close">
                     <a class="email-popup-close">
@@ -59,15 +59,15 @@
                         </li>
                         <li>
                             <label for="ch-AuthCode">
-                                <input type="number" id="ch-AuthCode" name="authCode" placeholder="이메일로 전송된 인증코드를 입력해주세요." class="input-style01 input-style02" disabled="">
-                                <span class="time-limit" id="time-limit" style="display: none;">00:00</span>
+                                <input type="text" id="ch-AuthCode" name="authCode" maxlength="6" placeholder="이메일로 전송된 인증코드를 입력해주세요." class="input-style01 input-style02">
+                                <span class="time-limit" id="time-limit" style="display: none;"></span>
                             </label>
                             <p id="code-error-alert" class="login-error-gray"></p>
                         </li>
                     </ul>
                     <div class="btn-box">
                         <div class="btn-purple">
-                            <a href="javascript:;" onclick="onSubmitUserId();">확인</a>
+                            <button id="emailSubmit" class="emailSubmit">확인</button>
                         </div>
                     </div>
                 </div>

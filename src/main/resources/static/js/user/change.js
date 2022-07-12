@@ -1,6 +1,4 @@
 {
-    let emailState = 2;
-
     let userElem = document.querySelector('#localConst');
     let iuser = userElem.dataset.iuser;
     let wid = userElem.dataset.w_id;
@@ -129,10 +127,13 @@
     }
 
     // e-mail 변경 팝업창
+    const myEmailFrm = document.querySelector('#myEmailFrm');
     const popupEmail = document.querySelector('#popup-user-email');
-    function onUserEmail () {
+
+    function onUserEmail() {
         popupEmail.style.display = 'block';
     }
+
     const emailPopupClose = document.querySelector('.email-popup-close');
     emailPopupClose.addEventListener('click', e => {
         popupEmail.style.display = 'none';
@@ -143,67 +144,93 @@
         let arr = objArr;
         let randomStr = "";
 
-        for (let j=0; j<iLength; j++) {
-            randomStr += arr[Math.floor(Math.random()*arr.length)];
+        for (let j = 0; j < iLength; j++) {
+            randomStr += arr[Math.floor(Math.random() * arr.length)];
         }
-
         return randomStr
     }
 
     // 숫자
     function getRandomCode(iLength) {
-        let arr="0,1,2,3,4,5,6,7,8,9".split(",");
+        let arr = "0,1,2,3,4,5,6,7,8,9".split(",");
 
         let rnd = createCode(arr, iLength);
         return rnd;
     }
 
-    const setEmailMsg = (data) => {
-        emailState = data.email;
+    const emailButton = document.querySelector('#btn-authcode');
+    const randomCode = getRandomCode(6);
+    emailButton.addEventListener('click', e => {
+        const emailVal = myEmailFrm.querySelector('#w_id');
+        if (wid === emailVal.value) {
+            const idErrorAlert = document.querySelector('#id-error-alert');
+            const inputStyle01 = document.querySelector('.input-style01');
+            idErrorAlert.className = "login-error-pink";
+            idErrorAlert.innerHTML = "사용중인 이메일(아이디)입니다.";
+            inputStyle01.className = "input-style01 input-with-code error-msg";
+            return false;
+        } else {
+            const emailVal = myEmailFrm.querySelector('#w_id').value;
+            fetch('/user/change/email', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify( {
+                    address: emailVal,
+                    title: "이메일 인증",
+                    message: "인증번호 : " + randomCode
+                })
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                }).catch(e => {
+                console.log(e);
+            });
+            alert('인증코드가 전송되었습니다. \n\n'  +
+                '인증코드 전송까지 일정시간이 소요되거나 지연될 수 있습니다. \n\n' +
+                '계속해서 인증코드가 전송되지 않을 경우 이메일 주소를 확인하시고 재전송해주세요. 이메일 전송시 스팸 메일로 분류될 수 있으니 스팸 메일함을 확인해 주세요.');
+            const idErrorAlert = document.querySelector('#id-error-alert');
+            const btnAuthcode = document.querySelector('#btn-authcode');
+            idErrorAlert.className = "login-error-purple";
+            idErrorAlert.innerHTML = "입력하신 이메일로 인증 코드가 전송되었습니다. 아래에 인증 코드를 입력하신 후 확인 버튼을 누르시면 이메일(아이디) 변경이 완료됩니다.";
+            btnAuthcode.innerHTML = '재전송';
+        }
+        // 인증코드, 타임 리밋
+        const chAuthCode = document.querySelector('#ch-AuthCode');
+        const timeLimit = document.querySelector('#time-limit');
+        const emailSubmit = document.querySelector('#emailSubmit');
+        if (emailSubmit) {
+            emailSubmit.addEventListener('click', e => {
+                const chAuthCodeVal = myEmailFrm.querySelector('#w_id').value;
+                if (randomCode === chAuthCode.value) {
+                    alert('이메일(아이디) 변경이 완려되었습니다.');
+                } else if (randomCode !== chAuthCode.value){
+                    const codeErrorAlert = document.querySelector('#code-error-alert');
+                    const chAuthCode = document.querySelector('#ch-AuthCode');
+                    codeErrorAlert.className = 'login-error-pink';
+                    codeErrorAlert.innerHTML = '인증코드가 일치하지 않습니다. 다시 입력해 주세요.';
+                    chAuthCode.className = 'input-style01 input-style02 error-msg';
+                    return false;
+                }
 
-        switch (data.email) {
-            case 0:
-                alert('이미 사용중인 이메일');
-                break;
-            case 1:
-                alert('인증 메일 발송');
-                const randomCode = getRandomCode(6);
-                const emailVal = myFrmElem.w_id.value;
-                fetch(`/user/mail`, {
+                fetch('/user/change/email/confirm', {
                     method: 'post',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify( {
-                        w_id : emailVal,
-                        title : "이메일 인증",
-                        message : "인증번호 : " + randomCode
-                    })
+                    body: JSON.stringify( {w_id:chAuthCodeVal})
                 })
                     .then(res => res.json())
                     .then((data) => {
-                        console.log(data);
+                        if (data === 1) {
+                            location.href = '/user/change';
+                        }
                     }).catch(e => {
                     console.log(e);
                 });
-                break;
+            });
         }
-    }
+    });
 
-    const emailButton = document.querySelector('#btn-authcode');
-    emailButton.addEventListener('click', e => {
-        const emailVal = myFrmElem.querySelector('#address');
 
-        fetch(`/user/emailChk`, {
-            'method': 'post',
-            'headers': {'Content-Type': 'application/json'},
-            'body': JSON.stringify({address : emailVal})
-        })
-            .then(res => res.json())
-            .then((data) => {
-                setEmailMsg(data);
-            }).catch((e) => {
-            console.log(e);
-        });
-    })
 
     // 비밀번호 변경 팝업창
     const popupPassword = document.querySelector('#popup-user-password');
@@ -252,7 +279,7 @@
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
-                {w_pw : newPasswordVal}
+                {w_pw: newPasswordVal}
             )
         }).then(res => res.json())
             .then(data => {

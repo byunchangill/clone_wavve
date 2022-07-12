@@ -61,4 +61,13 @@
         </if>
         WHERE iuser = ${iuser}
     </update>
+
+    <update id="changeEmail">
+        UPDATE w_user
+        SET
+        <if test=" w_id != null and w_id != '' ">
+            w_id = #{w_id}
+        </if>
+        WHERE iuser = ${iuser}
+    </update>
 </mapper>

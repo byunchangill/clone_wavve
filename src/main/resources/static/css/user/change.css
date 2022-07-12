@@ -483,6 +483,18 @@ ul.join-wrap02 li {
     text-align: center;
 }
 
+.btn-purple > button {
+    /*display: block;*/
+    background: #1351f9;
+    border-radius: 30px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    padding: 0 222px;
+}
+
 .common-box-email {
     padding: 40px 40px;
 }
@@ -506,7 +518,7 @@ ul.join-wrap02 li {
 }
 
 .join-input-box {
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .join-input-box li {
@@ -536,13 +548,11 @@ ul.join-wrap02 li {
     background: url(/imgs/item-icon/ico-error-purple.png) no-repeat left 2px;
 }
 
-/*
-.btn-input, .time-limit {
-    position: absolute;
-    right: 16px;
-    top: 5px;
-    padding: 10px 4px;
-    font-size: 16px;
-    line-height: 24px;
-    color: #fff;
-}*/
+.login-error-pink {
+    color: #ff27a3;
+    background: url(/imgs/item-icon/ico-error-pink.png) no-repeat left 2px;
+}
+
+input[type="text"].input-style01.error-msg {
+    border: 1px solid #ff27a3;
+}

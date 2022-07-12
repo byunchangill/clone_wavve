@@ -55,14 +55,6 @@ public class UserController {
         return res;
     }
 
-    @PostMapping("/emailChk")
-    @ResponseBody
-    public Map<String, Integer> emailChkProc(@RequestBody UserEntity entity) {
-        Map<String, Integer> res = new HashMap();
-        res.put("email", userService.emailChk(entity));
-        return res;
-    }
-
     //유저 프로필이미지, 닉네임 변경
     @GetMapping("/profile")
     public void profile() {
@@ -109,12 +101,16 @@ public class UserController {
     }
 
     // 이미엘 인증
-    @GetMapping("/mail")
-    public void email(){}
-
-    @PostMapping("/mail")
+    @PostMapping("/change/email")
     @ResponseBody
     public void emailProc(@RequestBody EmailDto emailDto) {
         userService.mailSend(emailDto);
+    }
+
+    // 이메일(아이디) 변경
+    @ResponseBody
+    @PostMapping("/change/email/confirm")
+    public int emailConfirm(@RequestBody UserEntity entity) {
+        return userService.changeEmail(entity);
     }
 }
