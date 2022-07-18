@@ -431,3 +431,12 @@ if (profileImg != null) {
 } else {
     profileImageArea.src = '/imgs/profile-imgs/00.png';
 }
+
+// 회원정보 수정 (Local, Oauth2)
+function changeUser() {
+    if (provider === 'LOCAL') {
+        location.href = '/user/me';
+    } else {
+        location.href = '/user/change';
+    }
+}

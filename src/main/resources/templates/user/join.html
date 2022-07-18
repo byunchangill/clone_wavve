@@ -72,23 +72,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:;" onclick="loginWithNaver();">
+                        <a th:href="@{/oauth2/authorization/naver}">
                             <img src="https://member.wavve.com/images/member/ico-common-naver.png" alt="네이버로 로그인">
                         </a>
-                        <div id="naver_id_login" style="display: none;"><a
-                                href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=IMRF4m29ielhnUTZYGHL&amp;redirect_uri=https%3A%2F%2Fmember.wavve.com%2Fmember%2Flogin_naver.html&amp;state=895883a8-e6dd-4a23-a1e3-6be0fd75235d"
-                                onclick="window.open(this.href, 'naverloginpop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550'); return false"
-                                id="naver_id_login_anchor"><img src="//static.nid.naver.com/oauth/button_g.PNG"
-                                                                border="0" title="네이버 아이디로 로그인" width="40" height="40"></a>
-                        </div>
                     </li>
                     <li>
-                        <a href="javascript:;" onclick="loginWithFacebook();">
+                        <a th:href="@{/oauth2/authorization/facebook}">
                             <img src="https://member.wavve.com/images/member/ico-common-facebook.png" alt="페이스북으로 로그인">
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:;" onclick="loginWithGoogle();">
+                        <a th:href="@{/oauth2/authorization/google}">
                             <img class="google-img"
                                  src="https://w7.pngwing.com/pngs/869/485/png-transparent-google-logo-computer-icons-google-text-logo-google-logo-thumbnail.png"
                                  alt="구글로 로그인">

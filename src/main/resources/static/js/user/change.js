@@ -6,6 +6,7 @@
     let birthday = userElem.dataset.w_birthday;
     let gender = userElem.dataset.w_gender;
     let phone = userElem.dataset.w_phone;
+    let provider = userElem.dataset.provider;
 
     console.log(iuser);
     console.log(wid);
@@ -13,6 +14,7 @@
     console.log(birthday);
     console.log(gender);
     console.log(phone);
+    console.log(provider);
 
     // 이메일 , 아이디 값 넣기
     const emailElem = document.querySelector('#email');
@@ -290,5 +292,14 @@
             }).catch(e => {
             console.log(e);
         });
+    }
+
+    // User !== LOCAL
+    const editFormIdElem = document.querySelector('.edit-form-id');
+    const editFormLinkElem = document.querySelector('.edit-form-link');
+
+    if (!(provider === 'LOCAL')) {
+        editFormIdElem.style.display = 'none';
+        editFormLinkElem.style.display = 'none';
     }
 }

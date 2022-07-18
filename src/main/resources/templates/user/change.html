@@ -12,7 +12,8 @@
 <body>
 <div id="localConst" th:with="auth=${#authentication.getPrincipal().getUser()}"
      th:attr="data-iuser=${auth.iuser}, data-w_id=${auth.w_id}, data-w_nm=${auth.w_nm},
-     data-w_birthday=${auth.w_birthday}, data-w_gender=${auth.w_gender}, data-w_phone=${auth.w_phone}">
+     data-w_birthday=${auth.w_birthday}, data-w_gender=${auth.w_gender}, data-w_phone=${auth.w_phone}
+     , data-provider=${auth.provider}">
 </div>
 <div class="header">
     <div class="header-gnb">
@@ -256,8 +257,7 @@
 </div>
 
 <div class="edit-leave-wrap">
-    <a href="#"
-       class="edit-leave-txt">회원탈퇴</a>
+    <a href="#" class="edit-leave-txt">회원탈퇴</a>
 </div>
 </div>
 </body>
