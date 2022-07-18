@@ -26,8 +26,6 @@ public class UserEntity {
     private String w_nickname;
     // 유저 프로필 이미지
     private String profileImg;
-    // 유저 권한
-    private String auth;
     // 유저 이름
     private String w_nm;
     // 유저 생일

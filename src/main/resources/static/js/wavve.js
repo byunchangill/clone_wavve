@@ -401,11 +401,13 @@ const iuser = localhostElem.dataset.iuser;
 const wid = localhostElem.dataset.w_id;
 const nickname = localhostElem.dataset.w_nickname;
 const profileImg = localhostElem.dataset.profileimg;
+const provider = localhostElem.dataset.provider;
 
 console.log(iuser);
 console.log(wid);
 console.log(nickname);
 console.log(profileImg);
+console.log(provider);
 
 // 닉네임
 const mainNickname = document.querySelector('#mainNickname');

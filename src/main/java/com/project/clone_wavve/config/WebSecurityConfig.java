@@ -1,5 +1,6 @@
 package com.project.clone_wavve.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +20,17 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final CustomOAuth2UserService customOauth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .csrf().disable()
+                .csrf().disable() //ajax-post 막힘을 풀어주기 위해
                 .authorizeRequests() // 인증 시작
                 .antMatchers("/user/profile", "/user/me", "/user/change").authenticated() //로그인 안됐을때 못들어가게
                 .anyRequest().permitAll()//나머지는 다 통과
@@ -43,7 +45,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .key("uniqueAndSecret")
                         .rememberMeParameter("remember-me")
                         .tokenValiditySeconds(86400 * 14)
-                        .userDetailsService(userDetailsService);
+                        .userDetailsService(customUserDetailsService);
+
+        http.oauth2Login()
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/user/login")
+                .userInfoEndpoint() //OAuth 2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당합니다.
+                .userService(customOauth2UserService);
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
@@ -60,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

@@ -5,12 +5,13 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-public class CustomUserPrincipal implements UserDetails {
+public class CustomUserPrincipal implements OAuth2User, UserDetails {
     @Getter
     private UserEntity user;
 
@@ -18,13 +19,13 @@ public class CustomUserPrincipal implements UserDetails {
         this.user = user;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getAuth()!=null?user.getAuth():"ROLE_USER"));
-    }
-
     public static CustomUserPrincipal create(UserEntity user) {
         return new CustomUserPrincipal(user);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     public Map<String, Object> getAttributes() {
@@ -59,5 +60,10 @@ public class CustomUserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return user.getW_nm();
     }
 }

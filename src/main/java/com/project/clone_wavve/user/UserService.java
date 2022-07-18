@@ -19,6 +19,7 @@ public class UserService {
 
     private final JavaMailSender javaMailSender;
 
+    // 이메일 인증
     public void mailSend(EmailDto emailDto){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(emailDto.getAddress());
@@ -29,6 +30,7 @@ public class UserService {
         System.out.println(emailDto.getMessage());
     }
 
+    // 회원가입
     public int join(UserEntity entity) {
         // 비밀번호 암호화
         String hashedWpw = passwordEncoder.encode(entity.getW_pw());
@@ -87,6 +89,7 @@ public class UserService {
         return result;
     }
 
+    // 비밀번호 변경
     public int changePw(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());
         // 비밀번호 암호화
@@ -96,6 +99,7 @@ public class UserService {
         return userMapper.changePw(entity);
     }
 
+    // 이메일(아이디) 변경
     public int changeEmail(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());
         auth.getLoginUser().setW_id(entity.getW_id());

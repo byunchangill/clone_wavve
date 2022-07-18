@@ -21,7 +21,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         param.setW_id(w_id);
         param.setProvider(ProviderType.LOCAL.toString());
 
-        UserEntity savedUser = mapper.selUser(param);
+//        UserEntity savedUser = mapper.selUser(param);
+        UserEntity savedUser = mapper.findByEmail(param);
         if(savedUser == null) {
             throw new UsernameNotFoundException(" 유저를 찾을 수가 없습니다. ");
         }
