@@ -43,7 +43,7 @@
         fetch(`/user/idChk/${idVal}`)
             .then(res => res.json())
             .then((data) => {
-                if (data.result !== 1) {
+                if (data !== 1) {
                     alert('이미 사용중인 아이디 입니다.');
                     location.href = "/user/join";
                 }

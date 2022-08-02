@@ -68,7 +68,7 @@ public class UserService {
         return result;
     }
 
-    // 프로필이미지, 닉네임 변경
+    // 이름, 생일, 성별, 폰번호 변경
     public int changeUser(UserEntity entity) {
         entity.setIuser(auth.getLoginUserPk());
 
@@ -76,7 +76,6 @@ public class UserService {
         auth.getLoginUser().setW_birthday(entity.getW_birthday());
         auth.getLoginUser().setW_gender(entity.getW_gender());
         auth.getLoginUser().setW_phone(entity.getW_phone());
-        auth.getLoginUser().setW_gender(entity.getW_gender());
 
         int result = userMapper.changeUser(entity);
         if (result == 1) {
@@ -84,7 +83,6 @@ public class UserService {
             entity.setW_birthday(entity.getW_birthday());
             entity.setW_gender(entity.getW_gender());
             entity.setW_phone(entity.getW_phone());
-            entity.setW_gender(entity.getW_gender());
         }
         return result;
     }
